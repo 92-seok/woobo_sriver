@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => {
     server: {
       port: Number(env.SERVICE_PORT),
       host: '0.0.0.0',
-      allowedHosts: ["www.woobo.online:8000", "localhost"],
+      allowedHosts: ["www.woobo.online", "localhost"],
       proxy: {
         '/api': {
           target: env.SERVICE_PROXY_TARGET,
