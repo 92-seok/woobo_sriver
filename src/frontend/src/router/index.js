@@ -7,7 +7,7 @@ const routes = [
     path: '/',
     name: 'Main',
     component: MainPage,
-    meta: { title: '상주시 소/하/천 관제' },
+    meta: { title: '소하천 통합관제 시스템' },
   },
   {
     path: '/detail/:id',
@@ -23,7 +23,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || '상주시 소/하/천 관제'
+  document.title = to.meta.title || '소하천 통합관제 시스템'
   next()
 })
 
