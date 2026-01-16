@@ -5,7 +5,7 @@
       <div class="brand" aria-hidden="true">
         <div class="brand__logo" aria-label="소하천 통합관제 시스템">
           <a href="/">
-            <img src="@/test/img/logo-sangju.png" alt="로고" />
+            <img src="@/assets/img/logo-sangju.png" alt="로고" />
           </a>
         </div>
       </div>

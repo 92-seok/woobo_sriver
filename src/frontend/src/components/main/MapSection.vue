@@ -2,7 +2,7 @@
   <section class="map" aria-label="지도 영역">
     <!-- 지도 이미지 -->
     <div id="naverMap" class="map__canvas map__canvas--image" aria-label="지도 이미지">
-      <img class="map__img" src="@/test/img/map.png" alt="지도 이미지">
+      <img class="map__img" src="@/assets/img/map.png" alt="지도 이미지">
       <!-- 마커 레이어 -->
       <div class="map__markers" id="mapMarkers" aria-label="지도 마커 레이어">
         <DeviceMarker v-for="device in filteredDevices" :key="device.id" :device="device"
