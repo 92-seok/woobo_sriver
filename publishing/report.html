@@ -1,0 +1,797 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유지보수 관리 시스템</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=tyuobfazcq"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light main-nav">
+                <a class="navbar-brand" href="/">통합 프로젝트 대시보드</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="/addlist">프로젝트 관리</a></li><li class="nav-item"><a class="nav-link" href="/car_record">차량 운행 기록부</a></li><li class="nav-item"><a class="nav-link" href="/maintenance">유지보수 관리 시스템</a></li><li class="nav-item"><a class="nav-link" href="/out">출장 기록 분석</a></li><li class="nav-item"><a class="nav-link" href="/smallriver">소하천 관리</a></li><li class="nav-item"><a class="nav-link" href="/gantt_chart">간트차트 임시</a></li><li class="nav-item"><a class="nav-link" href="http://woobo.online/">시스템사업부</a></li><li class="nav-item"><a class="nav-link" href="http://wbsystem.dscloud.mobi:8888/">WIKI 우보재난</a></li><li class="nav-item"><a class="nav-link" href="/work_reports">업무 보고 시스템</a></li><li class="nav-item"><a class="nav-link" href="/gpsmap">GPS 기록하기</a></li>                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main><link rel="stylesheet" href="/css/mobile_compact.css?v=1768464236"><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<!-- Inline Styles Removed: Using system/css/mobile_compact.css -->
+<style>
+    /* Specific video container style that might not be in global yet, or kept for specific logic */
+    #video-container {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        background-color: #333;
+        overflow: hidden;
+    }
+
+    #video-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<div class="container mt-2 m-p-0">
+    <div class="d-flex justify-content-between align-items-center mb-2 m-p-2">
+        <h1 class="m-text-md font-weight-bold m-0">상주 용유천 상세 정보</h1>
+        <div class="btn-group">
+            <a href="javascript:history.back()" class="btn btn-secondary btn-sm m-text-xs">목록</a>
+            <button type="button" class="btn btn-success btn-sm m-text-xs" id="view-snapshots-btn">사진</button>
+            <a href="report.php?id=10" target="_blank" class="btn btn-info btn-sm m-text-xs">보고서</a>
+            <a href="edit.php?id=10" class="btn btn-primary btn-sm m-text-xs">수정</a>
+        </div>
+    </div>
+
+    <div class="row m-0">
+        <div class="col-lg-7 p-1">
+            <div class="card mb-2 mobile-card">
+                <div class="card-header p-2">
+                    <h5 class="m-0 m-text-md font-weight-bold">종합 정보</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-bordered table-sm table-key-value m-0">
+                        <tr>
+                            <th>주소</th>
+                            <td>경상북도 상주시 화북면 용유리 601(용유교)</td>
+                        </tr>
+                        <tr>
+                            <th>종합 상태</th>
+                            <td><span class="badge badge-success">Operational</span></td>
+                        </tr>
+                        <tr>
+                            <th>마지막 업데이트</th>
+                            <td>2026-01-10 20:46:00</td>
+                        </tr>
+                        <tr>
+                            <th>설치일</th>
+                            <td>2023-06-13</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mb-2 mobile-card">
+                <div class="card-header p-2">
+                    <h5 class="m-0 m-text-md font-weight-bold">실시간 계측 정보 (최종)</h5>
+                </div>
+                <div class="card-body p-0">
+                                        <table class="table table-bordered table-sm table-key-value m-0">
+                        <tr>
+                            <th>계측 시간</th>
+                            <td colspan="3">2026-01-15 17:00:00</td>
+                        </tr>
+                        <tr>
+                            <th>수위(GL)</th>
+                            <td>0.411 m</td>
+                            <th>평균 유속</th>
+                            <td>00.129 m/s</td>
+                        </tr>
+                        <tr>
+                            <th>바닥기준(EL)</th>
+                            <td>274.364 m</td>
+                            <th>총 유량</th>
+                            <td>00.540 m³/s</td>
+                        </tr>
+                        <tr>
+                            <th>합산수위(FL)</th>
+                            <td>274.775 m</td>
+                            <th></th>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card mb-2 mobile-card">
+                <div class="card-header p-2">
+                    <h5 class="m-0 m-text-md font-weight-bold">수위 변화량(72시간)</h5>
+                </div>
+                <!-- Chart height can be tricky, keep some padding -->
+                <div class="card-body p-2">
+                    <div id="chart-loader" class="text-center p-3">
+                        <div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>
+                        <p class="mt-2 m-text-xs">데이터 로딩 중...</p>
+                    </div>
+                    <div id="chart-container" class="row m-0" style="display: none;">
+                        <div class="col-md-12 p-0">
+                            <div style="position: relative; height:250px; width:100%">
+                                <canvas id="waterLevelChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-2 mobile-card">
+                <div class="card-header p-2">
+                    <h5 class="m-0 m-text-md font-weight-bold">장비 진단 정보</h5>
+                </div>
+                <div class="card-body p-0">
+                                        <table class="table table-bordered table-sm table-key-value m-0">
+                        <tr>
+                            <th>S/W 버전</th>
+                            <td>1.4.4.0</td>
+                            <th>F/W 버전</th>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <th>마지막 재부팅</th>
+                            <td colspan="3">-</td>
+                        </tr>
+                        <tr>
+                            <th>수위계 상태</th>
+                            <td><span class="text-success font-weight-bold">정상</span></td>
+                            <th>유속계 상태</th>
+                            <td><span class="text-success font-weight-bold">정상</span></td>
+                        </tr>
+                        <tr>
+                            <th>연산장치</th>
+                            <td><span class="text-success font-weight-bold">정상</span></td>
+                            <th>UPS 상태</th>
+                            <td><span class="text-success font-weight-bold">정상</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 p-1">
+            <div class="card mb-2 mobile-card">
+                <div class="card-header p-2">
+                    <h5 class="m-0 m-text-md font-weight-bold">실시간 영상 <a href="notpage/index.php" target="_blank" class="badge badge-warning m-text-xs" style="vertical-align: middle;">재생불가 도움말</a></h5>
+                </div>
+                <div class="card-body p-2">
+                                                                    <div class="alert alert-success small" role="alert">장비와 통신이 정상입니다. 실시간 영상 재생이 가능합니다.</div>
+                        <div id="video-container" style="background-color: #333;">
+                            <canvas id="video-canvas"></canvas>
+                        </div>
+                        <div class="mt-2 d-flex align-items-center">
+                            <button id="play-stream-btn" class="btn btn-success">영상 재생</button>
+                            <button id="stop-stream-btn" class="btn btn-danger" style="display: none;">재생 중지</button>
+                            <span id="stream-status" class="ml-2 font-weight-bold text-muted"></span>
+                        </div>
+                                    </div>
+            </div>
+
+            <div class="card mb-2 mobile-card">
+                <div class="card-header p-2">
+                    <h5 class="m-0 m-text-md font-weight-bold">장비 위치</h5>
+                </div>
+                <!-- Map needs height. Keep inline height but ensure it fits. -->
+                <div class="card-body p-2">
+                    <div id="map" style="height: 250px; border: 1px solid #ddd; border-radius: 5px;"></div>
+                    <p class="text-muted mt-1 mb-1 m-text-xs">위도: 36.57228300, 경도: 127.93045600</p>
+                    <div class="d-flex" style="gap: 5px;">
+                        <button type="button" class="btn btn-outline-secondary btn-sm flex-fill m-text-xs" onclick="copyAddress('경상북도 상주시 화북면 용유리 601(용유교)')">
+                            <i class="fas fa-copy"></i> 주소 복사
+                        </button>
+                        <a href="https://map.naver.com/v5/search/%EA%B2%BD%EC%83%81%EB%B6%81%EB%8F%84+%EC%83%81%EC%A3%BC%EC%8B%9C+%ED%99%94%EB%B6%81%EB%A9%B4+%EC%9A%A9%EC%9C%A0%EB%A6%AC+601%28%EC%9A%A9%EC%9C%A0%EA%B5%90%29" target="_blank" class="btn btn-outline-success btn-sm flex-fill m-text-xs">
+                            <i class="fas fa-map-marked-alt"></i> 네이버 지도
+                        </a>
+                    </div>
+                </div>
+                <script>
+                    function copyAddress(address) {
+                        if (!address) {
+                            alert('복사할 주소가 없습니다.');
+                            return;
+                        }
+                        navigator.clipboard.writeText(address).then(function() {
+                            alert('주소가 복사되었습니다: ' + address);
+                        }, function(err) {
+                            console.error('복사 실패:', err);
+                            // Fallback
+                            const textArea = document.createElement("textarea");
+                            textArea.value = address;
+                            document.body.appendChild(textArea);
+                            textArea.select();
+                            try {
+                                document.execCommand('copy');
+                                alert('주소가 복사되었습니다: ' + address);
+                            } catch (err) {
+                                console.error('Fallback: Oops, unable to copy', err);
+                                prompt("이 주소를 직접 복사하세요:", address);
+                            }
+                            document.body.removeChild(textArea);
+                        });
+                    }
+                </script>
+            </div>
+
+            <div class="card mb-2 mobile-card">
+                <div class="card-header p-2">
+                    <h5 class="m-0 m-text-md font-weight-bold">네트워크 정보</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-bordered table-sm table-key-value m-0">
+                        <tr>
+                            <th>Public IP</th>
+                            <td>121.159.32.189</td>
+                        </tr>
+                        <tr>
+                            <th>Gateway IP</th>
+                            <td>121.159.32.190</td>
+                        </tr>
+                        <tr>
+                            <th>VPN Gateway</th>
+                            <td>10.54.12.1</td>
+                        </tr>
+                        <tr>
+                            <th>RTSP URL</th>
+                            <td>rtsp://admin:1234@121.159.32.189:4020/video1</td>
+                        </tr>
+                        <tr>
+                            <th>API Key</th>
+                            <td>5aa261fb-4856-33ec-bc79-33e29f78a691</td>
+                        </tr>
+                        <tr>
+                            <th>원격 ID</th>
+                            <td>47 046 647</td>
+                        </tr>
+                        <tr>
+                            <th>원격 P/W</th>
+                            <td>Woobosys4781!</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="snapshotModal" tabindex="-1" role="dialog" aria-labelledby="snapshotModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="snapshotModalLabel">스냅샷 뷰어</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="snapshot-gallery" style="max-height: 80vh; overflow-y: auto;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lightboxModal" tabindex="-1" aria-labelledby="lightboxModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content" style="background-color: rgba(0,0,0,0.8);">
+            <div class="modal-header" style="border-bottom: none;">
+                <h5 class="modal-title text-white" id="lightboxModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: #fff; opacity: 1;">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="" id="lightboxImage" class="img-fluid" style="max-height: 80vh;">
+            </div>
+            <div class="modal-footer justify-content-between" style="border-top: none;">
+                <button type="button" class="btn btn-light" id="lightboxPrev">&larr; 이전</button>
+                <button type="button" class="btn btn-light" id="lightboxNext">다음 &rarr;</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // 🚨 config.php 수정 없이 WEB_HOST 생성
+    const protocol = window.location.protocol;
+    const host = window.location.host;
+    window.WEB_HOST = `${protocol}//${host}`;
+
+    // PHP에서 정의한 BASE_URL 상수를 JavaScript로 전달 (선택 사항, 다른 곳에서 사용될 수 있음)
+    window.APP_BASE_URL = "";
+</script>
+<script src="https://woobo.duckdns.org:9999/jsmpeg.js"></script>
+<script src="/js/rtsp-player.js"></script>
+<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=tyuobfazcq"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const viewSnapshotsBtn = document.getElementById('view-snapshots-btn');
+        // Bootstrap 4 uses jQuery for modals, so we don't need new bootstrap.Modal()
+        const galleryContainer = document.getElementById('snapshot-gallery');
+        const locationId = 10;
+
+        // --- 파일명 파싱 함수 (KST) ---
+        function parseFilenameToKstDate(url) {
+            const filename = url.substring(url.lastIndexOf('/') + 1);
+            const match = filename.match(/_(\d{8})_(\d{6})\.jpg$/);
+
+            if (match) {
+                const dateStr = match[1];
+                const timeStr = match[2];
+                const year = dateStr.substring(0, 4);
+                const month = dateStr.substring(4, 6);
+                const day = dateStr.substring(6, 8);
+                const hour = timeStr.substring(0, 2);
+                const minute = timeStr.substring(2, 4);
+                const second = timeStr.substring(4, 6);
+
+                const kstIsoStr = `${year}-${month}-${day}T${hour}:${minute}:${second}+09:00`;
+                return new Date(kstIsoStr);
+            }
+            return null;
+        }
+        // ----------------------------
+
+        // --- Lightbox variables and functions ---
+        let allSnapshots = [];
+        let currentLightboxIndex = -1;
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxTitle = document.getElementById('lightboxModalLabel');
+        const lightboxPrevBtn = document.getElementById('lightboxPrev');
+        const lightboxNextBtn = document.getElementById('lightboxNext');
+
+        function showLightbox(index) {
+            if (index < 0 || index >= allSnapshots.length) return;
+
+            currentLightboxIndex = index;
+            const snapshot = allSnapshots[index];
+
+            const relativePath = snapshot.url.startsWith('/system') ? snapshot.url.substring('/system'.length) : snapshot.url;
+            const absoluteUrl = window.WEB_HOST + relativePath;
+
+            lightboxImage.src = absoluteUrl;
+
+            // 파일명에서 시간 파싱 및 KST로 표시 (라이트박스 제목용)
+            const kstDate = parseFilenameToKstDate(absoluteUrl);
+            if (kstDate) {
+                lightboxTitle.textContent = kstDate.toLocaleString('ko-KR');
+            } else {
+                lightboxTitle.textContent = '시간 정보 없음';
+            }
+
+            if (lightboxPrevBtn) lightboxPrevBtn.disabled = (currentLightboxIndex === 0);
+            if (lightboxNextBtn) lightboxNextBtn.disabled = (currentLightboxIndex === allSnapshots.length - 1);
+
+            $('#snapshotModal').modal('hide'); // BS4 Hide
+            $('#lightboxModal').modal('show'); // BS4 Show
+        }
+
+        if (lightboxPrevBtn) {
+            lightboxPrevBtn.addEventListener('click', () => {
+                if (currentLightboxIndex > 0) showLightbox(currentLightboxIndex - 1);
+            });
+        }
+        if (lightboxNextBtn) {
+            lightboxNextBtn.addEventListener('click', () => {
+                if (currentLightboxIndex < allSnapshots.length - 1) showLightbox(currentLightboxIndex + 1);
+            });
+        }
+
+        // Handle Lightbox close to reopen gallery (Optional, but good UX)
+        $('#lightboxModal').on('hidden.bs.modal', function() {
+            $('#snapshotModal').modal('show');
+        });
+        // --- End of Lightbox ---
+
+        if (viewSnapshotsBtn) {
+            viewSnapshotsBtn.addEventListener('click', function() {
+                galleryContainer.innerHTML = '<div class="text-center p-5"><div class="spinner-border"></div><p class="mt-2">스냅샷 목록을 불러옵니다...</p></div>';
+                $('#snapshotModal').modal('show'); // BS4 Show
+
+                fetch(`get_snapshots.php?id=${locationId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        galleryContainer.innerHTML = '';
+                        allSnapshots = [];
+                        let globalIndex = 0;
+
+                        if (Object.keys(data).length === 0) {
+                            galleryContainer.innerHTML = '<div class="alert alert-warning">표시할 스냅샷이 없습니다.</div>';
+                            return;
+                        }
+
+                        const sortedDates = Object.keys(data).sort((a, b) => new Date(b) - new Date(a));
+
+                        // --- Accordion Setup ---
+                        const accordionId = 'snapshotAccordion';
+                        galleryContainer.innerHTML = `<div class="accordion" id="${accordionId}"></div>`;
+                        const accordionContainer = galleryContainer.querySelector('.accordion');
+
+                        const today = new Date();
+                        const pad = n => n.toString().padStart(2, '0');
+                        const getYmd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+                        const todayStr = getYmd(today);
+
+                        const yesterday = new Date(today);
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        const yesterdayStr = getYmd(yesterday);
+
+                        sortedDates.forEach((date, index) => {
+                            let snapshots = data[date];
+
+                            // Sort snapshots by time (Descending: Newest first)
+                            snapshots.sort((a, b) => {
+                                const urlA = a.url.startsWith('/system') ? a.url.substring('/system'.length) : a.url;
+                                const urlB = b.url.startsWith('/system') ? b.url.substring('/system'.length) : b.url;
+                                const dateA = parseFilenameToKstDate(window.WEB_HOST + urlA) || new Date(0);
+                                const dateB = parseFilenameToKstDate(window.WEB_HOST + urlB) || new Date(0);
+                                return dateB - dateA;
+                            });
+
+                            // Add to global list for lightbox
+                            snapshots.forEach(s => allSnapshots.push({
+                                ...s,
+                                date: date
+                            }));
+
+                            // Label Logic
+                            const dObj = new Date(date);
+                            const monthDay = `${dObj.getMonth() + 1}월 ${dObj.getDate()}일`;
+                            let dateLabel = `<strong>${monthDay}</strong>`;
+
+                            if (date === todayStr) dateLabel += ' <span class="badge badge-primary ml-1">오늘</span>'; // BS4 badge class
+                            else if (date === yesterdayStr) dateLabel += ' <span class="badge badge-secondary ml-1">어제</span>'; // BS4 badge class
+
+                            // IDs
+                            const headingId = `heading-${date}`;
+                            const collapseId = `collapse-${date}`;
+                            const isFirst = index === 0;
+                            const showClass = isFirst ? 'show' : '';
+                            const collapsedClass = isFirst ? '' : 'collapsed';
+                            const expandedAttr = isFirst ? 'true' : 'false';
+
+                            // Generate Image Grid HTML
+                            let imagesHtml = '';
+                            snapshots.forEach(snapshot => {
+                                const relativePath = snapshot.url.startsWith('/system') ? snapshot.url.substring('/system'.length) : snapshot.url;
+                                const absoluteUrl = window.WEB_HOST + relativePath;
+                                const kstDate = parseFilenameToKstDate(absoluteUrl);
+
+                                let displayTime = 'N/A';
+                                if (kstDate) {
+                                    displayTime = kstDate.toLocaleTimeString('ko-KR', {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        second: '2-digit',
+                                        hour12: false
+                                    });
+                                }
+
+                                imagesHtml += `
+                                    <div class="col-md-3 mb-3">
+                                        <a href="${absoluteUrl}" class="snapshot-thumbnail" data-index="${globalIndex}" style="cursor: pointer;">
+                                            <img src="${absoluteUrl}" class="img-fluid rounded border" alt="${displayTime}" loading="lazy"
+                                                 onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'d-flex align-items-center justify-content-center bg-light border rounded\' style=\'height:100%; min-height:150px;\'><span class=\'text-muted small\'>이미지 없음</span></div>';">
+                                        </a>
+                                        <p class="text-center small text-muted mt-1">${displayTime}</p>
+                                    </div>`;
+                                globalIndex++;
+                            });
+
+                            // Accordion Item HTML (Bootstrap 4 Syntax)
+                            // data-toggle="collapse", data-target, data-parent
+                            const itemHtml = `
+                                <div class="card">
+                                    <div class="card-header" id="${headingId}">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link btn-block text-left ${collapsedClass}" type="button" data-toggle="collapse" data-target="#${collapseId}" aria-expanded="${expandedAttr}" aria-controls="${collapseId}" style="text-decoration:none; color:inherit;">
+                                                <span class="d-flex justify-content-between align-items-center">
+                                                    <span>${dateLabel}</span>
+                                                    <span class="badge badge-light border">${snapshots.length}장</span>
+                                                </span>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="${collapseId}" class="collapse ${showClass}" aria-labelledby="${headingId}" data-parent="#${accordionId}">
+                                        <div class="card-body bg-light">
+                                            <div class="row">
+                                                ${imagesHtml}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            accordionContainer.insertAdjacentHTML('beforeend', itemHtml);
+                        });
+                    })
+                    .catch(error => {
+                        galleryContainer.innerHTML = '<div class="alert alert-danger">스냅샷을 불러오는 중 오류가 발생했습니다.</div>';
+                        console.error('Error fetching snapshots:', error);
+                    });
+            });
+
+            galleryContainer.addEventListener('click', function(e) {
+                const thumbnailLink = e.target.closest('.snapshot-thumbnail');
+                if (thumbnailLink) {
+                    e.preventDefault();
+                    const index = parseInt(thumbnailLink.dataset.index, 10);
+                    if (!isNaN(index)) {
+                        showLightbox(index);
+                    }
+                }
+            });
+        }
+
+        const lat = 36.572283;
+        const lon = 127.930456;
+        if (lat && lon && window.naver && window.naver.maps) {
+            const mapOptions = {
+                center: new naver.maps.LatLng(lat, lon),
+                zoom: 16
+            };
+            const map = new naver.maps.Map('map', mapOptions);
+            const marker = new naver.maps.Marker({
+                position: new naver.maps.LatLng(lat, lon),
+                map: map
+            });
+        } else {
+            const mapDiv = document.getElementById('map');
+            if (mapDiv) mapDiv.innerHTML = '<div class="alert alert-warning">GPS 좌표가 없어 지도를 표시할 수 없습니다.</div>';
+        }
+
+        const rtspUrl = "rtsp:\/\/admin:1234@121.159.32.189:4020\/video1";
+        if (rtspUrl) {
+            new RtspPlayer({
+                rtspUrl: rtspUrl,
+                container: document.getElementById('video-container'),
+                canvas: document.getElementById('video-canvas'),
+                playBtn: document.getElementById('play-stream-btn'),
+                stopBtn: document.getElementById('stop-stream-btn'),
+                statusEl: document.getElementById('stream-status'),
+            });
+
+            const videoContainer = document.getElementById('video-container');
+            // 💡 PHP 변수 이름 변경 (혼동 방지)
+            const latestSnapshotUrlRelative = "\/system\/uploads\/rtsp_captures\/\uc0c1\uc8fc_\uc6a9\uc720\ucc9c_\uacbd\uc0c1\ubd81\ub3c4_\uc0c1\uc8fc\uc2dc_\ud654\ubd81\uba74_\uc6a9\uc720\ub9ac_601(\uc6a9\uc720\uad50)_20260115_170005.jpg";
+
+            function revertToSnapshot() {
+                if (videoContainer && latestSnapshotUrlRelative) {
+                    // 🚨 수정: 중복 경로 제거 후 절대 URL 사용 (최초 로딩 시 배경 이미지)
+                    const relativePath = latestSnapshotUrlRelative.startsWith('/system') ? latestSnapshotUrlRelative.substring('/system'.length) : latestSnapshotUrlRelative;
+                    const absoluteSnapshotUrl = window.WEB_HOST + relativePath;
+
+                    videoContainer.style.backgroundImage = `url('${absoluteSnapshotUrl}')`;
+                    videoContainer.style.backgroundSize = 'cover';
+                    videoContainer.style.backgroundPosition = 'center';
+                } else if (videoContainer) {
+                    videoContainer.style.backgroundColor = '#333'; // Fallback color
+                }
+            }
+            revertToSnapshot(); // 최초 로딩 시 최신 스냅샷 표시
+
+            const playBtn = document.getElementById('play-stream-btn');
+            if (playBtn) {
+                playBtn.addEventListener('click', () => {
+                    if (videoContainer) {
+                        videoContainer.style.backgroundImage = 'none';
+                        videoContainer.style.backgroundColor = '#000';
+                    }
+                });
+            }
+
+            const stopBtn = document.getElementById('stop-stream-btn');
+            if (stopBtn) {
+                stopBtn.addEventListener('click', revertToSnapshot);
+            }
+
+            const statusEl = document.getElementById('stream-status');
+            if (statusEl) {
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.type === 'childList' || mutation.type === 'characterData') {
+                            const newText = mutation.target.textContent.toLowerCase();
+                            if (newText.includes('error') || newText.includes('failed') || newText.includes('fail')) {
+                                revertToSnapshot();
+                            }
+                        }
+                    });
+                });
+                observer.observe(statusEl, {
+                    childList: true,
+                    characterData: true,
+                    subtree: true
+                });
+            }
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const locationId = 10;
+        const enclosureHeight = null;
+        const levelCritical = enclosureHeight ? (enclosureHeight * 0.9).toFixed(2) : null;
+        const levelWarning = enclosureHeight ? (enclosureHeight * 0.8).toFixed(2) : null;
+        const levelCaution = enclosureHeight ? (enclosureHeight * 0.7).toFixed(2) : null;
+
+        function getStatus(waterLevel) {
+            if (!enclosureHeight || !levelCritical) return {
+                status: '정보없음',
+                className: 'text-muted'
+            };
+            const level = parseFloat(waterLevel);
+            if (level >= levelCritical) return {
+                status: '심각',
+                className: 'text-danger'
+            };
+            if (level >= levelWarning) return {
+                status: '경계',
+                className: 'text-warning'
+            };
+            if (level >= levelCaution) return {
+                status: '주의',
+                className: 'text-info'
+            };
+            return {
+                status: '정상',
+                className: 'text-success'
+            };
+        }
+
+        const loader = document.getElementById('chart-loader');
+        const chartContainer = document.getElementById('chart-container');
+
+        fetch(`get_water_level_history.php?id=${locationId}`)
+            .then(response => {
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        throw new Error(`Server responded with ${response.status}: ${text}`);
+                    });
+                }
+                // Clone the response to be able to read it twice (as JSON, and as text if JSON parsing fails)
+                const responseClone = response.clone();
+                return response.json().catch(() => {
+                    return responseClone.text().then(text => {
+                        throw new Error(`Failed to parse JSON. Server responded with:\n${text}`);
+                    });
+                });
+            })
+            .then(historyData => {
+                if (!historyData || historyData.length === 0) {
+                    loader.innerHTML = '<div class="alert alert-warning">표시할 수위 이력 데이터가 없습니다.</div>';
+                    return;
+                }
+
+                loader.style.display = 'none';
+                chartContainer.style.display = 'flex';
+
+                const ctx = document.getElementById('waterLevelChart').getContext('2d');
+                const labels = historyData.map(d => {
+                    const logDate = new Date(d.log_time);
+                    return `${String(logDate.getMonth() + 1).padStart(2, '0')}-${String(logDate.getDate()).padStart(2, '0')} ${String(logDate.getHours()).padStart(2, '0')}:${String(logDate.getMinutes()).padStart(2, '0')}`;
+                });
+                const waterLevels = historyData.map(d => parseFloat(d.water_level));
+                const avgVelocities = historyData.map(d => parseFloat(d.avg_velocity));
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '수위 (m)',
+                            data: waterLevels,
+                            borderColor: '#007bff',
+                            backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                            borderWidth: 2,
+                            pointRadius: 2,
+                            yAxisID: 'y',
+                        }, {
+                            label: '평균 유속 (m/s)',
+                            data: avgVelocities,
+                            borderColor: '#28a745',
+                            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                            borderWidth: 2,
+                            pointRadius: 2,
+                            yAxisID: 'y1',
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: '수위 (m)',
+                                    color: '#007bff'
+                                },
+                                ticks: {
+                                    color: '#007bff'
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                position: 'right',
+                                title: {
+                                    display: true,
+                                    text: '평균 유속 (m/s)',
+                                    color: '#28a745'
+                                },
+                                ticks: {
+                                    color: '#28a745'
+                                },
+                                grid: {
+                                    drawOnChartArea: false
+                                },
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            }
+                        },
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Detailed Fetch Error:', error.message);
+
+                // Helper function to escape HTML to display it safely as text
+                function escapeHtml(unsafe) {
+                    return unsafe
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#039;");
+                }
+
+                loader.innerHTML = `<div class="alert alert-danger">
+                <h5>데이터 로딩 실패</h5>
+                <p>서버에서 오류가 발생하여 데이터를 불러올 수 없습니다. 아래는 서버의 실제 응답 내용입니다.</p>
+                <pre style="white-space: pre-wrap; word-break: break-all; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 5px;">${escapeHtml(error.message)}</pre>
+            </div>`;
+            });
+    });
+</script>
+
+        </main>
+        </div>
+
+        <!-- Bootstrap JS and its dependencies (jQuery and Popper.js) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        </body>
+
+        </html>
