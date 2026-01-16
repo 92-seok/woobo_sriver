@@ -10,7 +10,7 @@ const LEVELS = { CAUTION: 70, WARN: 80, CRIT: 90 };
 
 
 /** ✅ 지도 이미지 위 좌표(%)로 찍습니다. (left/top) */
-const DEVICES_BASE = [
+export const DEVICES_BASE = [
   {
     id: "D-001",
     name: "상주 용유천",
@@ -47,7 +47,7 @@ const DEVICES_BASE = [
     online: false,
     img: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=70",
   },
-    {
+  {
     id: "D-005",
     name: "창녕 (2)",
     addr: "경상남도",
@@ -57,7 +57,7 @@ const DEVICES_BASE = [
     netError: true,   // ✅ 추가: 네트워크 에러
     img: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=70",
   },
-      {
+  {
     id: "D-006",
     name: "상주 안동 (2)",
     addr: "경상남도 창녕군 이방면 안리 1013",
@@ -132,7 +132,7 @@ function stagePillClass(stage) {
   }
 }
 
-function stageCardClass(stage){
+function stageCardClass(stage) {
   if (stage === "crit") return "card--crit";
   if (stage === "warn") return "card--warn";
   if (stage === "caution") return "card--caution";
@@ -140,7 +140,7 @@ function stageCardClass(stage){
   return "card--unk";
 }
 
-function stageDotClass(stage){
+function stageDotClass(stage) {
   if (stage === "crit") return "card__dot card__dot--crit";
   if (stage === "warn") return "card__dot card__dot--warn";
   if (stage === "caution") return "card__dot card__dot--caution";
@@ -162,7 +162,7 @@ function markerDotClass(stage) {
    ✅ applyWaterBadges()
    - pill + popupWaterBadge 동시에 업데이트
 --------------------------- */
-function waterBadgeClass(stage){
+function waterBadgeClass(stage) {
   if (stage === "crit") return "popup__waterBadge--crit";
   if (stage === "warn") return "popup__waterBadge--warn";
   if (stage === "caution") return "popup__waterBadge--caution";
@@ -204,7 +204,7 @@ function applyWaterBadges({ device, pillEl = null, popupEl = null }) {
  * 3) water == null      -> Unknown
  * 4) 그 외              -> Operational
  */
-function networkLabel(device){
+function networkLabel(device) {
   if (!device) return "Unknown";
   if (device.netError === true) return "Network Error";
   if (!device.online || device.water == null) return "Unknown";
@@ -215,7 +215,7 @@ function networkLabel(device){
  * 카드/팝업에서 쓰는 네트워크 stage
  * ok | error | unk
  */
-function networkStage(device){
+function networkStage(device) {
   const label = networkLabel(device);
   if (label === "Operational") return "ok";
   if (label === "Network Error") return "error";
@@ -224,10 +224,10 @@ function networkStage(device){
 
 
 function updatePopupNetwork(device) {
-  const netWrap   = document.getElementById("popupNet");
-  const netDot    = document.getElementById("popupNetDot");
+  const netWrap = document.getElementById("popupNet");
+  const netDot = document.getElementById("popupNetDot");
   const netTextEl = document.getElementById("popupNetText");
-  const popup     = document.getElementById("devicePopup");
+  const popup = document.getElementById("devicePopup");
 
   if (!netWrap || !netDot || !netTextEl || !popup) return;
 
@@ -239,7 +239,7 @@ function updatePopupNetwork(device) {
 
   // 네트워크 영역
   netWrap.className = "popup__net popup__net--" + stage;
-  netDot.className  = "popup__dot popup__dot--" + stage;
+  netDot.className = "popup__dot popup__dot--" + stage;
 
   // ✅ 팝업 테두리 동기화 (핵심)
   popup.classList.remove(
@@ -250,11 +250,11 @@ function updatePopupNetwork(device) {
   popup.classList.add("popup--net-" + stage);
 }
 
-function networkDotClass(stage){
+function networkDotClass(stage) {
   return "card__dot card__dot--" + stage;
 }
 
-function networkTextClass(stage){
+function networkTextClass(stage) {
   return "status-text status-text--" + stage;
 }
 
@@ -367,7 +367,7 @@ function renderList() {
   shown.forEach(d => {
     const stage = waterStageFrom(d);        // 수위 단계
     const netStage = networkStage(d);       // 네트워크 단계
-    const netText  = networkLabel(d);
+    const netText = networkLabel(d);
 
     const card = document.createElement("div");
     card.className =
@@ -428,7 +428,7 @@ function selectDevice(id, opts = { openPopup: true }) {
   if (opts.openPopup) openPopupAtMarker(d);
 }
 
-function positionPopupNearMarker(deviceId){
+function positionPopupNearMarker(deviceId) {
   const popup = elPopup;
   const marker = document.querySelector(`.map-marker[data-id="${deviceId}"]`);
   const map = document.querySelector(".map");
@@ -442,25 +442,25 @@ function positionPopupNearMarker(deviceId){
   let y = (mRect.top) - mapRect.top;
 
   popup.style.left = x + "px";
-  popup.style.top  = y + "px";
+  popup.style.top = y + "px";
 
   // clamp horizontally inside map
   requestAnimationFrame(() => {
     const pRect = popup.getBoundingClientRect();
-    const leftOverflow  = pRect.left - mapRect.left;
+    const leftOverflow = pRect.left - mapRect.left;
     const rightOverflow = mapRect.right - pRect.right;
 
     if (leftOverflow < 8) x += (8 - leftOverflow);
     if (rightOverflow < 8) x -= (8 - rightOverflow);
 
     popup.style.left = x + "px";
-    popup.style.top  = y + "px";
+    popup.style.top = y + "px";
   });
 }
 
-function isMobileLike() {
-  return window.matchMedia("(pointer: coarse)").matches;
-}
+// function isMobileLike() {
+//   return window.matchMedia("(pointer: coarse)").matches;
+// }
 
 function isMobilePopupMode() {
   // 터치 기기(폴드 포함)면 모바일 모드로 간주
@@ -468,7 +468,7 @@ function isMobilePopupMode() {
 }
 
 
-function openPopupAtMarker(d){
+function openPopupAtMarker(d) {
   openCenterPopup(d); // 내용 채우고 show
 
   // ✅ 모바일(터치): CSS fixed 위치로 고정 (마커 근처 배치 금지)
@@ -709,9 +709,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-function netStage(d){
+function netStage(d) {
   return (!d.online || d.water == null) ? "unk" : "ok"; // Operational=ok, Unknown=unk
 }
-function netText(d){
+function netText(d) {
   return netStage(d) === "ok" ? "Operational" : "Unknown";
 }
