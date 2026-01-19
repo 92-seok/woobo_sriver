@@ -8,7 +8,7 @@
     <DetailTopbar />
 
     <!-- 메인콘텐츠 -->
-    <div class="detail-wrap">
+    <div class="sub-wrap">
       <DetailContent />
     </div>
   </div>
@@ -32,6 +32,6 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/assets/style/detail.css';
 </style>

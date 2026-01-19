@@ -9,8 +9,14 @@ body {
 }
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR",
-    Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Noto Sans KR",
+    Arial,
+    sans-serif;
   color: #e9eef6;
   background: #0b1424;
   position: relative;
@@ -29,31 +35,32 @@ body::before {
   z-index: -2;
 
   background:
-    /* 강한 블루 (좌상단) */ radial-gradient(
+    /* 강한 블루 (좌상단) */
+    radial-gradient(
       1100px 800px at 12% 18%,
       rgba(16, 58, 131, 0.55),
       transparent 68%
     ),
     /* 네온 퍼플 (우상단) */
-      radial-gradient(
+    radial-gradient(
         1000px 800px at 88% 20%,
         rgba(24, 17, 95, 0.5),
         transparent 72%
       ),
     /* 강한 사이언 (하단 중앙) */
-      radial-gradient(
+    radial-gradient(
         900px 700px at 50% 88%,
         rgba(0, 110, 255, 0.45),
         transparent 70%
       ),
     /* 핫 핑크 포인트 (우하단) */
-      radial-gradient(
+    radial-gradient(
         800px 600px at 82% 82%,
         rgba(46, 29, 204, 0.38),
         transparent 75%
       ),
     /* 딥 네이비 베이스 */
-      linear-gradient(
+    linear-gradient(
         135deg,
         rgb(8, 18, 45) 0%,
         rgb(18, 34, 70) 35%,
@@ -62,7 +69,8 @@ body::before {
 
   background-size: 180% 180%;
   filter: saturate(1.6) contrast(1.25);
-  animation: bgMove 18s ease-in-out infinite alternate,
+  animation:
+    bgMove 18s ease-in-out infinite alternate,
     hueShiftStrong 26s linear infinite;
   transform: translateZ(0);
 }
@@ -85,7 +93,8 @@ body::after {
   mix-blend-mode: screen;
   opacity: 0.55;
   filter: blur(55px);
-  animation: bgSpin 15s linear infinite,
+  animation:
+    bgSpin 15s linear infinite,
     hueShiftStrong 13s linear infinite reverse;
   transform: translateZ(0);
 }
@@ -963,7 +972,9 @@ input:focus {
   width: 560px;
   border-radius: 18px;
   border: 3px solid rgba(255, 255, 255, 0.25); /* 기본 */
-  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+  transition:
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
   transform: translate(-50%, calc(-100% - 14px));
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(10px);
@@ -1050,19 +1061,22 @@ input:focus {
 /* ===== 네트워크 상태별 테두리 ===== */
 .popup--net-ok {
   border-color: var(--ok);
-  box-shadow: 0 0 0 1px rgba(39, 196, 107, 0.35),
+  box-shadow:
+    0 0 0 1px rgba(39, 196, 107, 0.35),
     0 12px 36px rgba(39, 196, 107, 0.25);
 }
 
 .popup--net-error {
   border-color: var(--crit);
-  box-shadow: 0 0 0 1px rgba(255, 77, 79, 0.45),
+  box-shadow:
+    0 0 0 1px rgba(255, 77, 79, 0.45),
     0 14px 40px rgba(255, 77, 79, 0.35);
 }
 
 .popup--net-unk {
   border-color: var(--unk);
-  box-shadow: 0 0 0 1px rgba(154, 167, 183, 0.35),
+  box-shadow:
+    0 0 0 1px rgba(154, 167, 183, 0.35),
     0 10px 28px rgba(154, 167, 183, 0.25);
 }
 
@@ -1399,6 +1413,9 @@ input:focus {
   border-radius: 50%;
   box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.32);
   border: 2px solid rgba(0, 0, 0, 0.5);
+  display: block;
+  margin: 4px;
+  transition: all 0.3s ease;
 }
 .nm-dot--ok {
   background: var(--ok);
@@ -1764,19 +1781,22 @@ input:focus {
 /* === Popup border follows network stage (FINAL) === */
 .popup.popup--net-ok {
   border-color: var(--ok) !important;
-  box-shadow: 0 0 0 1px rgba(39, 196, 107, 0.35),
+  box-shadow:
+    0 0 0 1px rgba(39, 196, 107, 0.35),
     0 16px 60px rgba(39, 196, 107, 0.25) !important;
 }
 
 .popup.popup--net-error {
   border-color: var(--crit) !important;
-  box-shadow: 0 0 0 1px rgba(255, 77, 79, 0.45),
+  box-shadow:
+    0 0 0 1px rgba(255, 77, 79, 0.45),
     0 18px 70px rgba(255, 77, 79, 0.33) !important;
 }
 
 .popup.popup--net-unk {
   border-color: var(--unk) !important;
-  box-shadow: 0 0 0 1px rgba(154, 167, 183, 0.35),
+  box-shadow:
+    0 0 0 1px rgba(154, 167, 183, 0.35),
     0 14px 52px rgba(154, 167, 183, 0.25) !important;
 }
 

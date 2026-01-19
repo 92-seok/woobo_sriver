@@ -1,9 +1,5 @@
 <template>
   <div class="main-page">
-    <!-- 배경 레이어 -->
-    <!-- <div class="bg-layer-1"></div>
-    <div class="bg-layer-2"></div> -->
-
     <!-- 스킵 링크 -->
     <a class="skip-link" href="#main">본문 바로가기</a>
 

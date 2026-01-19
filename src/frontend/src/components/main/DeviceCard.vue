@@ -51,10 +51,4 @@ const netDotClass = computed(() => `card__dot--${netStage.value}`)
 const netTextClass = computed(() => `status-text--${netStage.value}`)
 </script>
 
-<style scoped>
-.card__water {
-  margin-top: 10px;
-  display: flex;
-  justify-content: flex-end;
-}
-</style>
+<style scoped></style>

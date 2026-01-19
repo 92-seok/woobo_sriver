@@ -10,7 +10,7 @@ const LEVELS = { CAUTION: 70, WARN: 80, CRIT: 90 };
 
 
 /** ✅ 지도 이미지 위 좌표(%)로 찍습니다. (left/top) */
-export const DEVICES_BASE = [
+const DEVICES_BASE = [
   {
     id: "D-001",
     name: "상주 용유천",
