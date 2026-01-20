@@ -72,7 +72,7 @@
           <div class="waterbar__tick waterbar__tick--90" title="90%"></div>
         </div>
         <div class="waterbar__legend">
-          <span class="lg lg--ok">정상(<70)</span>
+          <span class="lg lg--ok">정상(◀70)</span>
           <span class="lg lg--caution">주의(70)</span>
           <span class="lg lg--warn">경계(80)</span>
           <span class="lg lg--crit">심각(90)</span>
@@ -83,11 +83,11 @@
     <!-- 푸터 버튼 -->
     <div class="popup__foot">
       <v-btn variant="text" class="btn-ghost" @click="$emit('close')">
-        <v-icon>mdi-close</v-icon>
+        <v-icon class="mr-2">mdi-close</v-icon>
         <span>닫기</span>
       </v-btn>
-      <v-btn variant="flat" color="primary" @click="$emit('detail')">
-        <v-icon>mdi-magnify</v-icon>
+      <v-btn variant="text" class="btn-soft" @click="$emit('detail')">
+        <v-icon class="mr-2">mdi-magnify</v-icon>
         <span>상세보기</span>
       </v-btn>
     </div>
