@@ -28,7 +28,7 @@ onMounted(() => {
   document.body.classList.add('page-detail')
   const deviceId = route.params.id
   if (deviceId) {
-    deviceStore.setActivceDevice(deviceId)
+    deviceStore.setActiveDevice(deviceId)
   }
 })
 

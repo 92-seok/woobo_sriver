@@ -51,4 +51,4 @@ const netDotClass = computed(() => `card__dot--${netStage.value}`)
 const netTextClass = computed(() => `status-text--${netStage.value}`)
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>
