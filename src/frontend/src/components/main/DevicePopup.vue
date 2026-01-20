@@ -36,23 +36,23 @@
         <div class="popup__right">
           <dl class="kv">
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--unk"></span>함체높이</dt>
+              <dt><span class="mr-5 sq sq--unk"></span>함체 높이</dt>
               <dd>{{ device.height || '-' }}</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--unk"></span>현재수위</dt>
+              <dt><span class="mr-5 sq sq--ok"></span>현재 수위(%)</dt>
               <dd>{{ device.water != null ? device.water : '-' }}</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--unk"></span>주의 (70%)</dt>
+              <dt><span class="mr-5 sq sq--caution"></span>주의 (70%)</dt>
               <dd>{{ device.lv70 || '-' }} m</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--unk"></span>경계 (80%)</dt>
+              <dt><span class="mr-5 sq sq--warm"></span>경계 (80%)</dt>
               <dd>{{ device.lv80 || '-' }} m</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--unk"></span>심각 (90%)</dt>
+              <dt><span class="mr-5 sq sq--crit"></span>심각 (90%)</dt>
               <dd>{{ device.lv90 || '-' }} m</dd>
             </div>
           </dl>
@@ -72,7 +72,7 @@
           <div class="waterbar__tick waterbar__tick--90" title="90%"></div>
         </div>
         <div class="waterbar__legend">
-          <span class="lg lg--ok">정상(70)</span>
+          <span class="lg lg--ok">정상(<70)</span>
           <span class="lg lg--caution">주의(70)</span>
           <span class="lg lg--warn">경계(80)</span>
           <span class="lg lg--crit">심각(90)</span>

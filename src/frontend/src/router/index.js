@@ -23,7 +23,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('이동 경로:', from.path, '->', to.path);
+  // console.log('이동 경로:', from.path, '->', to.path);
   document.title = to.meta.title || '소하천 통합관제 시스템'
   next()
 })

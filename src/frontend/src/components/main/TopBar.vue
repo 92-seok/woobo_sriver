@@ -19,16 +19,16 @@
       <!-- 메뉴 (드롭다운) -->
       <div class="search__actions" id="topbarActions" :class="{ 'is-open': menuOpen }" role="group" aria-label="바로가기">
         <v-btn variant="text" class="btn-ghost">
-          <v-icon>mdi-waves</v-icon>
+          <v-icon class="mr-2">mdi-waves</v-icon>
           <span>수위</span>
         </v-btn>
         <v-btn variant="text" class="btn-ghost">
-          <v-icon>mdi-cctv</v-icon>
+          <v-icon class="mr-2">mdi-cctv</v-icon>
           <span>CCTV</span>
         </v-btn>
-        <v-btn variant="flat" color="primary">
-          <v-icon>mdi-file-document</v-icon>
-          <span>보고서</span>
+        <v-btn variant="text" class="btn-ghost">
+          <v-icon class="mr-2">mdi-file-document</v-icon>
+          <span class="mr-2">보고서</span>
         </v-btn>
       </div>
     </div>

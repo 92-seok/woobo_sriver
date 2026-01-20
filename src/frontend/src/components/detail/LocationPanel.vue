@@ -14,14 +14,14 @@
         </div>
 
         <div class="video-actions">
-          <button class="btn btn-soft" @click="copyAddress">
-            <v-icon>mdi-content-copy</v-icon>
+          <v-btn class="btn btn-soft" @click="copyAddress">
+            <v-icon class="mr-2">mdi-content-copy</v-icon>
             주소 복사
-          </button>
-          <button class="btn btn-ghost" @click="openNaverMap">
-            <v-icon>mdi-map-outline</v-icon>
+          </v-btn>
+          <v-btn class="btn btn-ghost" @click="openNaverMap">
+            <v-icon class="mr-2">mdi-map-outline</v-icon>
             네이버 지도
-          </button>
+          </v-btn>
         </div>
       </div>
     </section>

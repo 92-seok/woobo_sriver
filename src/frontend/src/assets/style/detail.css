@@ -18,6 +18,37 @@ body {
   overflow: hidden; /* 바탕 스크롤 제거 */
 }
 
+/* 추가 부분 */
+.v-application {
+  font-family: "Noto Sans KR", sans-serif !important;
+}
+
+.v-application [class*="text-"] {
+  font-family: "Noto Sans KR", sans-serif !important;
+}
+
+body .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  background-color: #your-color;
+  border: 1px solid #your-border;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
 /* 상단바 높이 (실제 topbar 높이에 맞춰 숫자만 조절) */
 :root {
   --topbar-h: 64px;
@@ -828,7 +859,6 @@ body.page-detail {
   .video-text {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
   }
 
   .sub-stack--left .water-grid {

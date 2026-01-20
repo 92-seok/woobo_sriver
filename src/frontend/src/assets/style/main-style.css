@@ -99,6 +99,37 @@ body::after {
   transform: translateZ(0);
 }
 
+/* 추가 부분 */
+.v-application {
+  font-family: "Noto Sans KR", sans-serif !important;
+}
+
+.v-application [class*="text-"] {
+  font-family: "Noto Sans KR", sans-serif !important;
+}
+
+body .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  background-color: #your-color;
+  border: 1px solid #your-border;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
 /* ===== Top ===== */
 .topbar {
   height: 70px;
@@ -1482,6 +1513,13 @@ input:focus {
    ========================================================= */
 
 /* 상태별 pill도 흰색 유지 */
+
+.card__water {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* 
 .pill--ok{
   color: var(--ok) !important;

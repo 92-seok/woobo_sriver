@@ -13,7 +13,7 @@
       <div class="sub-panel-bd">
         <div>
           <div class="video-text" style="color: var(--muted); font-weight: 900">
-            <span class="sub_pill sub_pill_02 good mb-10">
+            <span class="sub_pill sub_pill_02 good mb-2">
               <span class="dot-10"></span>
               <span class="pill-text-02">정상 (Operational)</span>
             </span>
