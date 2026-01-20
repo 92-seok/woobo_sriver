@@ -137,7 +137,8 @@ body::after {
   min-height: 0;
   padding: var(--pad) !important;
   grid-template-columns: minmax(0, 1fr) var(--sidebarW);
-  grid-template-rows: 1fr var(--bottomH); /* ✅ 위(지도/목록) + 아래(상태패널) */
+  /* grid-template-rows: 1fr var(--bottomH); ✅ 위(지도/목록) + 아래(상태패널) */
+  grid-template-rows: 1fr;
   height: calc(100dvh - var(--topbarH));
   min-height: 0;
   gap: var(--gap) !important;
@@ -194,7 +195,21 @@ body::after {
   --sidebarW: 420px; /* 우측 고정 */
 
   --btnH: 34px;
-  --btnW: 100px;
+  --btnW: 120px;
+}
+
+.bg-navy01 {
+  background: rgba(12, 18, 32, 0.2) !important;
+}
+.text-12 {
+  font-size: 12px !important;
+}
+
+.w-130px {
+  width: 130px !important;
+}
+.h-30px {
+  height: 30px !important;
 }
 
 .mt-5 {
@@ -203,12 +218,25 @@ body::after {
 .mr-10 {
   margin-right: 10px;
 }
+.ml-10 {
+  margin-left: 10px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
 .mr-5 {
   margin-right: 5px;
+}
+.mb-5 {
+  margin-bottom: 5px;
 }
 .pt-5 {
   padding-top: 5px;
 }
+.pb-10 {
+  padding-bottom: 10px;
+}
+
 /* 기존 원형 dot 대신 세로 상태바 */
 .sq {
   width: 3px;
@@ -335,9 +363,11 @@ input:focus {
   --icon-size: 16px;
 }
 .btn__icon {
-  line-height: 1;
-  width: var(--icon-size);
-  height: var(--icon-size);
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
 }
 
 .btn--ghost:hover {
@@ -357,6 +387,9 @@ input:focus {
 .btn--danger {
   background: rgba(255, 77, 79, 0.25);
   border-color: rgba(255, 77, 79, 0.55);
+}
+.btn--blue03 {
+  background: rgba(164, 238, 255, 0.3);
 }
 
 /* 3) 하천명 검색 부분: 한 줄 강제 */
@@ -490,59 +523,6 @@ input:focus {
   gap: 1rem;
 }
 
-/* 패널(카드) */
-.sub-panel {
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  background: var(--sub-panel);
-  border: 1px solid var(--stroke);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
-  margin-bottom: 15px;
-}
-.sub-panel .sub-panel-hd {
-  background: linear-gradient(
-    180deg,
-    rgba(78, 160, 255, 0.32),
-    rgba(78, 160, 255, 0.1)
-  );
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 0.7rem 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 800;
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: auto; /* 내용이 많으면 카드 내부만 스크롤 */
-}
-.sub-panel .sub-panel-hd small {
-  font-weight: 800;
-  color: rgba(255, 210, 70, 0.95);
-}
-.sub-panel .sub-panel-bd {
-  padding: 0.85rem 0.9rem;
-  background: var(--sub-panel2);
-}
-
-/* 패널(카드) */
-.sub-panel {
-  background: var(--sub-panel);
-  border: 1px solid var(--stroke);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
-}
-
-.map-sub-wrap,
-.video-sub-wrap {
-  height: clamp(240px, 32vh, 360px);
-}
-
 /* 검색라인은 한 줄 유지 */
 .sub_topbar .controls__searchline {
   display: flex;
@@ -602,9 +582,6 @@ input:focus {
   border: 1px solid rgba(255, 255, 255, 0.14);
   color: var(--text);
 }
-.btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
 
 /* .map__canvas{height:640px;} */
 
@@ -651,32 +628,6 @@ input:focus {
   max-height: calc(100vh - 170px);
 }
 
-/* 정보 테이블 느낌 */
-.sub-kv {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 0.5rem 0.8rem;
-  align-items: center;
-}
-.k {
-  color: var(--muted);
-  font-weight: 800;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 0.4rem 0.55rem;
-  text-align: left;
-  white-space: nowrap;
-}
-.v {
-  font-weight: 800;
-  padding: 0.25rem 0;
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  min-width: 0;
-}
-
 .map {
   display: grid !important;
   gap: var(--gap);
@@ -701,7 +652,7 @@ input:focus {
 }
 
 .card {
-  border-radius: 14px;
+  border-radius: 10px;
   border: 1px solid var(--line);
   background: rgba(0, 0, 0, 0.18);
   padding: 12px;
@@ -753,28 +704,6 @@ input:focus {
   .detail-col {
     overflow: visible;
   }
-
-  /* 카드별 순서 재정의 */
-  .panel--summary {
-    order: 1;
-  } /* 종합정보 */
-  .panel--realtime {
-    order: 2;
-  } /* 실시간 계측 */
-
-  .panel--network {
-    order: 3;
-  } /* 네트워크 */
-  .panel--diagnostic {
-    order: 4;
-  } /* 장비 진단 */
-
-  .panel--video {
-    order: 5;
-  } /* 실시간 영상 */
-  .panel--location {
-    order: 6;
-  } /* 장비 위치 */
 }
 
 /* ===============================
@@ -964,7 +893,6 @@ input:focus {
 /* 팝업: JS가 left/top(px) 배치, 위로 띄우기 */
 /* ===== Popup (center fixed over map) ===== */
 .popup {
-  display: flex;
   flex-direction: column;
   position: absolute;
   left: 50%;
@@ -983,6 +911,8 @@ input:focus {
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.45);
   max-height: min(68vh, 520px);
   overflow: auto;
+  left: 0;
+  top: 0;
 }
 
 .popup__head {
@@ -1178,15 +1108,6 @@ input:focus {
   overflow: auto;
 }
 
-/* 종합정보 내부 2×2 KV 그리드 */
-.panel--summary .sub-kv {
-  display: grid !important;
-  grid-template-columns: 140px 1fr 140px 1fr !important; /* k v | k v */
-  column-gap: 14px;
-  row-gap: 10px;
-  align-items: center;
-}
-
 /* 하단 2개 카드가 bottomH 내에서 꽉 차도록 */
 .bottom {
   grid-column: 1 / -1; /* ✅ 전체 컬럼을 다 차지(핵심) */
@@ -1194,7 +1115,6 @@ input:focus {
   margin: 0;
   height: 100px;
   min-height: 0;
-  padding: 0 10px;
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: var(--gap);
@@ -1223,7 +1143,7 @@ input:focus {
 }
 
 .panel {
-  border-radius: 14px;
+  border-radius: 8px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.06);
   padding: 12px;
@@ -1269,29 +1189,6 @@ input:focus {
   gap: 8px;
   font-weight: 900;
 }
-.mini-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.7rem;
-  margin-top: 0.7rem;
-}
-.mini {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 0.6rem 0.7rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 0.7rem;
-}
-.mini .label {
-  color: var(--muted);
-  font-weight: 900;
-  white-space: nowrap;
-}
-.mini .val {
-  font-weight: 900;
-}
 
 .dot {
   width: 8px;
@@ -1321,31 +1218,6 @@ input:focus {
   border-radius: 50%;
   background: var(--good);
   box-shadow: 0 0 0 4px rgba(56, 210, 125, 0.14);
-}
-
-.sub_pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.18rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 900;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.18);
-  white-space: nowrap;
-}
-
-.sub_pill.good {
-  color: rgba(160, 255, 205, 0.95);
-}
-.sub_pill.warn .dot-10 {
-  background: var(--warn);
-  box-shadow: 0 0 0 4px rgba(255, 211, 77, 0.15);
-}
-.sub_pill.bad .dot-10 {
-  background: var(--bad);
-  box-shadow: 0 0 0 4px rgba(255, 90, 106, 0.16);
 }
 
 .bar {
@@ -1410,12 +1282,10 @@ input:focus {
 .nm-dot {
   width: 14px;
   height: 14px;
+  display: block;
   border-radius: 50%;
   box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.32);
   border: 2px solid rgba(0, 0, 0, 0.5);
-  display: block;
-  margin: 4px;
-  transition: all 0.3s ease;
 }
 .nm-dot--ok {
   background: var(--ok);
@@ -1482,17 +1352,6 @@ input:focus {
   background: rgba(255, 255, 255, 0.06);
   height: 320px;
   position: relative;
-}
-.map-placeholder {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: rgba(235, 245, 255, 0.75);
-  font-weight: 900;
-  letter-spacing: 0.2px;
-  text-align: center;
-  padding: 1rem;
 }
 
 /* 하단 네트워크 바 */
@@ -1894,12 +1753,12 @@ input:focus {
 } /* 햄버거 기본은 숨김 */
 
 @media (max-width: 1600px) {
-  .bottom {
-    height: 140px;
-  }
   .legend ul {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .legend li {
+    font-size: 0.8rem !important;
   }
   :root {
     --bottomH: 150px;
@@ -1908,8 +1767,70 @@ input:focus {
   .kv__row {
     padding-right: 14px;
   }
-}
 
+  .panel__head div h2,
+  .sidebar__title h2 {
+    font-size: 1rem;
+  }
+
+  .panel__icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+  }
+
+  .sidebar__head {
+    padding: 10px 14px;
+  }
+  .bar {
+    height: 10px;
+  }
+  .bar-legend {
+    font-size: 0.7rem;
+    margin-top: 6px;
+  }
+
+  /* 모바일에서 팝업 사이즈, 위치 고정 */
+  .map-popup,
+  .marker-popup,
+  .popup,
+  .device-popup {
+    position: fixed !important;
+    left: 33% !important;
+    top: 90px !important;
+    transform: translateX(-50%) !important;
+
+    /* 🔥 고정 높이 제거 */
+    height: auto !important;
+    min-height: 0 !important;
+
+    /* 🔥 내용만큼 늘어나되 화면을 넘기지 않게 */
+    max-height: calc(100dvh - 110px) !important; /* top(90) + 여백(20) */
+
+    /* 폭 */
+    width: min(500px, calc(100vw - 24px)) !important;
+
+    /* 내용이 많으면 팝업 내부에서 스크롤 */
+    overflow: auto !important;
+
+    z-index: 9999 !important;
+  }
+
+  /* ===== Top ===== */
+  .topbar {
+    height: 60px;
+  }
+
+  .brand__logo {
+    height: 60px;
+  }
+  .brand__logo img {
+    height: 44px;
+  }
+  .map {
+    min-height: 0 !important;
+  }
+}
 /* 좁은 화면에서는 우측이 아래로 내려오도록(가로폭 부족 대비) */
 /* 태블릿 이하: 1열(위 지도, 아래 목록) - 그래도 화면 안에 분배 */
 
@@ -1959,32 +1880,6 @@ input:focus {
 
   .bottom {
     grid-template-columns: 1.2fr 1fr;
-  }
-
-  /* 패널 안에 overflow:auto 강제되어 있으면 모바일에서 잘릴 수 있음 */
-  .sub-panel .sub-panel-bd {
-    overflow: visible !important;
-  }
-
-  .sub_topbar .controls {
-    flex-wrap: wrap; /* ✅ 모바일만 줄바꿈 */
-    width: 100%;
-    justify-content: flex-start;
-    display: flex; /* ===== Base ===== */
-    * {
-      box-sizing: border-box;
-    }
-    align-items: stretch;
-    gap: 10px;
-  }
-  .sub_topbar .controls .form-control {
-    width: auto !important;
-    flex: 1 1 auto;
-    min-width: 140px;
-  }
-
-  .form-control .form-control-sm .ctl-input {
-    min-width: 140px;
   }
 }
 
@@ -2218,6 +2113,10 @@ input:focus {
   .legend li {
     font-size: 0.6rem;
   }
+  .legend ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
 
 /* 헤더 영역 줄바꿈 + 햄버거 드롭다운 (모바일) */
@@ -2231,8 +2130,6 @@ input:focus {
     width: min(540px, calc(100vw - 24px)) !important;
     max-height: calc(100dvh - (72px + 20px + 20px)) !important;
     overflow: auto !important;
-
-    z-index: 30001 !important; /* topbar보다 위 */
   }
 
   /* 헤더를 레이어 최상단으로 고정 */
@@ -2353,8 +2250,6 @@ input:focus {
     width: min(540px, calc(100vw - 24px)) !important;
     max-height: calc(100dvh - (72px + 20px + 20px)) !important;
     overflow: auto !important;
-
-    z-index: 30001 !important; /* topbar보다 위 */
   }
 
   /* 헤더를 레이어 최상단으로 고정 */

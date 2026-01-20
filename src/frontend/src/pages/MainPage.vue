@@ -32,7 +32,7 @@ onMounted(() => {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/style/main-style.css';
 
 .main-page {

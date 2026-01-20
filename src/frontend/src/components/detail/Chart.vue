@@ -121,4 +121,16 @@ const chartOptions = {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.chart-container {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+}
+
+.chart-container :deep(canvas) {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+</style>
