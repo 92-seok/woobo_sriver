@@ -77,7 +77,8 @@ export function useKakaoMap(options = {}) {
   const isLoaded = ref(false);
   const error = ref(null);
   const markers = ref([]);
-
+  const mapTypeControl = ref(null);
+  const zoomControl = ref();
   /**
    * 지도 초기화
    * @param {string|HTMLElement} container - 지도 컨테이너 ID 또는 엘리먼트
@@ -104,18 +105,19 @@ export function useKakaoMap(options = {}) {
       map.value = new window.kakao.maps.Map(containerEl, mapOptions);
 
       // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-      var mapTypeControl = new window.kakao.maps.MapTypeControl();
+      mapTypeControl.value = new window.kakao.maps.MapTypeControl();
+      console.log("mapTypeControl ok", mapTypeControl.value);
 
       // 지도 타입 컨트롤을 지도에 표시합니다
       map.value.addControl(
-        mapTypeControl,
+        mapTypeControl.value,
         window.kakao.maps.ControlPosition.TOPRIGHT,
       );
 
       // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다.
-      var zoomControl = new window.kakao.maps.ZoomControl();
+      zoomControl.value = new window.kakao.maps.ZoomControl();
       map.value.addControl(
-        zoomControl,
+        zoomControl.value,
         window.kakao.maps.ControlPosition.RIGHT,
       );
 
@@ -222,6 +224,8 @@ export function useKakaoMap(options = {}) {
     isLoaded,
     error,
     markers,
+    mapTypeControl,
+    zoomControl,
     initMap,
     addMarker,
     clearMarkers,

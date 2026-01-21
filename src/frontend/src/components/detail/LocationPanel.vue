@@ -46,7 +46,7 @@ const latDisplay = computed(() => Number(props.device?.lat ?? 36.4128.toFixed(6)
 const lonDisplay = computed(() => Number(props.device?.lon ?? 128.1583.toFixed(6)))
 
 // 카카오맵 Composable
-const { map, isLoaded, initMap }
+const { map, isLoaded, initMap, mapTypeControl, zoomControl }
   = useKakaoMap({
     lat: lat.value,
     lng: lng.value,
@@ -66,6 +66,10 @@ async function setupMap() {
   await initMap('detailKakaoMap')
   if (isLoaded.value && map.value) {
     createMarker()
+    map.value.setZoomable(false);
+    map.value.setDraggable(false);
+    console.log(mapTypeControl)
+    map.value.removeControl(zoomControl.value, window.kakao.maps.ControlPosition.TOPRIGHT);
   }
 }
 
