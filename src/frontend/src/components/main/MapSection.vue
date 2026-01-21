@@ -3,6 +3,13 @@
     <!-- 카카오맵 컨테이너 -->
     <div id="kakaoMap" class="map__canvas" aria-label="카카오 지도"></div>
 
+    <!-- <div class="map__type-toggle">
+      <button type="button" :class="['map__type-btn', { active: mapType === 'ROADMAP' }]"
+        @click="setMapType('ROADMAP')">지도</button>
+      <button type="button" :class="['map__type-btn', { active: mapType === 'HYBRID' }]"
+        @click="setMapType('HYBRID')">위성</button>
+    </div> -->
+
     <!-- 로딩 상태 -->
     <div v-if="!isLoaded && !error" class="map__loading">
       지도 로딩 중...
@@ -54,6 +61,10 @@ onMounted(async () => {
   await initMap('kakaoMap')
   if (isLoaded.value) {
     createMarkers()
+    // 초기 렌더링 시 팝업 표시하기
+    if (activeDevice.value) {
+      showPopup.value = true;
+    }
   }
 })
 
@@ -130,6 +141,8 @@ watch(filteredDevices, () => {
 // 활성 장비 변경 시 지도 이동
 watch(activeDeviceId, (newId) => {
   if (newId && isLoaded.value) {
+    // 카드 클릭 시 팝업 표시
+    showPopup.value = true
     const device = filteredDevices.value.find(d => d.id === newId)
     if (device?.lat && device?.lon) {
       panTo(device.lat, device.lon)

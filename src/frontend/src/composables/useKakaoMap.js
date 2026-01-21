@@ -102,6 +102,23 @@ export function useKakaoMap(options = {}) {
       };
 
       map.value = new window.kakao.maps.Map(containerEl, mapOptions);
+
+      // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+      var mapTypeControl = new window.kakao.maps.MapTypeControl();
+
+      // 지도 타입 컨트롤을 지도에 표시합니다
+      map.value.addControl(
+        mapTypeControl,
+        window.kakao.maps.ControlPosition.TOPRIGHT,
+      );
+
+      // 지도 확대 축소를 제어할 수 있는 줌 컨트롤을 생성합니다.
+      var zoomControl = new window.kakao.maps.ZoomControl();
+      map.value.addControl(
+        zoomControl,
+        window.kakao.maps.ControlPosition.RIGHT,
+      );
+
       isLoaded.value = true;
     } catch (e) {
       error.value = e.message;

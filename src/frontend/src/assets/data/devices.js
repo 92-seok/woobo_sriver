@@ -16,8 +16,8 @@ export const DEVICES_BASE = [
     name: "상주 양촌2천",
     addr: "경상북도 상주시 하북면 용유리 601(용유교)",
     // pos: { x: 52, y: 73 }, // 지도 이미지 기준 %
-    lat: 36.4128,
-    lon: 128.1583,
+    lat: 36.3321,
+    lon: 128.1383,
     water: 42,
     online: true,
     img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=70",
@@ -26,7 +26,9 @@ export const DEVICES_BASE = [
     id: "D-002",
     name: "상주 연원천",
     addr: "경상북도 상주시 ○○면 ○○리",
-    pos: { x: 36, y: 85 },
+    // pos: { x: 36, y: 85 },
+    lat: 36.3128,
+    lon: 128.1683,
     water: 73,
     online: true,
     img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=70",
@@ -35,7 +37,9 @@ export const DEVICES_BASE = [
     id: "D-003",
     name: "상주 백두점천",
     addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 68, y: 64 },
+    // pos: { x: 68, y: 64 },
+    lat: 36.3128,
+    lon: 128.2603,
     water: 81,
     online: true,
     img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
@@ -44,7 +48,9 @@ export const DEVICES_BASE = [
     id: "D-004",
     name: "상주 이화천",
     addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 75, y: 62 },
+    // pos: { x: 75, y: 62 },
+    lat: 36.4789,
+    lon: 128.2688,
     water: null, // 수신 없음 → Unknown
     online: false,
     img: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=70",
@@ -53,7 +59,9 @@ export const DEVICES_BASE = [
     id: "D-005",
     name: "상주 장동천",
     addr: "경상남도",
-    pos: { x: 30, y: 62 },
+    // pos: { x: 30, y: 62 },
+    lat: 36.4228,
+    lon: 128.103,
     water: 100, // 수신 없음 → Unknown
     online: true,
     netError: false, // ✅ 추가: 네트워크 에러
@@ -63,7 +71,9 @@ export const DEVICES_BASE = [
     id: "D-006",
     name: "상주 득수천",
     addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 60, y: 82 },
+    // pos: { x: 60, y: 82 },
+    lat: 36.4444,
+    lon: 128.3011,
     water: 88, // 수신 없음 → Unknown
     online: true,
     netError: true, // ✅ 추가: 네트워크 에러
@@ -73,7 +83,9 @@ export const DEVICES_BASE = [
     id: "D-007",
     name: "상주 대미천",
     addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 60, y: 82 },
+    // pos: { x: 60, y: 82 },
+    lat: 36.3131,
+    lon: 127.9911,
     water: 90, // 수신 없음 → Unknown
     online: true,
     netError: false, // ✅ 추가: 네트워크 에러
@@ -83,7 +95,9 @@ export const DEVICES_BASE = [
     id: "D-008",
     name: "상주 화남천",
     addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 60, y: 82 },
+    // pos: { x: 60, y: 82 },
+    lat: 36.5111,
+    lon: 127.9911,
     water: 20, // 수신 없음 → Unknown
     online: false,
     netError: false, // ✅ 추가: 네트워크 에러
@@ -93,7 +107,9 @@ export const DEVICES_BASE = [
     id: "D-009",
     name: "상주 용유천",
     addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 60, y: 82 },
+    // pos: { x: 60, y: 82 },
+    lat: 36.4131,
+    lon: 127.9991,
     water: 49, // 수신 없음 → Unknown
     online: true,
     netError: true, // ✅ 추가: 네트워크 에러
@@ -103,7 +119,9 @@ export const DEVICES_BASE = [
     id: "D-010",
     name: "상주 봉림천",
     addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 60, y: 82 },
+    // pos: { x: 60, y: 82 },
+    lat: 36.4431,
+    lon: 127.9891,
     water: 77, // 수신 없음 → Unknown
     online: true,
     netError: false, // ✅ 추가: 네트워크 에러
@@ -113,7 +131,9 @@ export const DEVICES_BASE = [
     id: "D-011",
     name: "상주 남곡천",
     addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 60, y: 82 },
+    // pos: { x: 60, y: 82 },
+    lat: 36.4132,
+    lon: 128.201,
     water: 55, // 수신 없음 → Unknown
     online: false,
     netError: true, // ✅ 추가: 네트워크 에러

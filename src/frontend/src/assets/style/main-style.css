@@ -196,6 +196,7 @@ p {
   --warn: #ff9f1a; /* 80 */
   --crit: #ff4d4f; /* 90 */
   --unk: #9aa7b7;
+  
   /* 속도만 취향대로 */
   --bg-speed: 18s;
   --bg-speed2: 26s;
@@ -209,7 +210,7 @@ p {
   --muted: rgba(235, 245, 255, 0.65);
   --brand: #4ea0ff;
   --good: #38d27d;
-  --warn: #ffd34d;
+  /* --warn: #ffd34d; */
   --bad: #ff5a6a;
   --chip: #1b5fa3;
 
@@ -282,7 +283,7 @@ p {
 .sq--caution {
   background-color: var(--caution);
 }
-.sq--warm {
+.sq--warn {
   background-color: var(--warn);
 }
 .sq--crit {

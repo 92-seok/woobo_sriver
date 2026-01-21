@@ -48,7 +48,7 @@
               <dd>{{ device.lv70 || '-' }} m</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--warm"></span>경계 (80%)</dt>
+              <dt><span class="mr-5 sq sq--warn"></span>경계 (80%)</dt>
               <dd>{{ device.lv80 || '-' }} m</dd>
             </div>
             <div class="kv__row">
