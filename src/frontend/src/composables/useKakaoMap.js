@@ -106,7 +106,6 @@ export function useKakaoMap(options = {}) {
 
       // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
       mapTypeControl.value = new window.kakao.maps.MapTypeControl();
-      console.log("mapTypeControl ok", mapTypeControl.value);
 
       // 지도 타입 컨트롤을 지도에 표시합니다
       map.value.addControl(

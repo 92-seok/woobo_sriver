@@ -3,13 +3,6 @@
     <!-- 카카오맵 컨테이너 -->
     <div id="kakaoMap" class="map__canvas" aria-label="카카오 지도"></div>
 
-    <!-- <div class="map__type-toggle">
-      <button type="button" :class="['map__type-btn', { active: mapType === 'ROADMAP' }]"
-        @click="setMapType('ROADMAP')">지도</button>
-      <button type="button" :class="['map__type-btn', { active: mapType === 'HYBRID' }]"
-        @click="setMapType('HYBRID')">위성</button>
-    </div> -->
-
     <!-- 로딩 상태 -->
     <div v-if="!isLoaded && !error" class="map__loading">
       지도 로딩 중...

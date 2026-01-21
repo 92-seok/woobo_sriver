@@ -50,7 +50,7 @@ const { map, isLoaded, initMap, mapTypeControl, zoomControl }
   = useKakaoMap({
     lat: lat.value,
     lng: lng.value,
-    level: 5, // 상세페이지는 좀 더 가까이 보이기
+    level: 1, // 상세페이지는 좀 더 가까이 보이기
   })
 
 // 마커, 오버레이 저장
@@ -68,8 +68,8 @@ async function setupMap() {
     createMarker()
     map.value.setZoomable(false);
     map.value.setDraggable(false);
-    console.log(mapTypeControl)
     map.value.removeControl(zoomControl.value, window.kakao.maps.ControlPosition.TOPRIGHT);
+    // map.value.setMapTypeId(window.kakao.maps.MapTypeId.ROADMAP);
   }
 }
 
