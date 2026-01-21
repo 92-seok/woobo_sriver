@@ -13,7 +13,7 @@ const LEVELS = { CAUTION: 70, WARN: 80, CRIT: 90 };
 export const DEVICES_BASE = [
   {
     id: "D-001",
-    name: "상주 용유천",
+    name: "상주 양촌2천",
     addr: "경상북도 상주시 하북면 용유리 601(용유교)",
     // pos: { x: 52, y: 73 }, // 지도 이미지 기준 %
     lat: 36.4128,
@@ -24,7 +24,7 @@ export const DEVICES_BASE = [
   },
   {
     id: "D-002",
-    name: "상주 ○○천",
+    name: "상주 연원천",
     addr: "경상북도 상주시 ○○면 ○○리",
     pos: { x: 36, y: 85 },
     water: 73,
@@ -33,16 +33,16 @@ export const DEVICES_BASE = [
   },
   {
     id: "D-003",
-    name: "창녕 내동천",
+    name: "상주 백두점천",
     addr: "경상남도 창녕군 이방면 안리 1013",
     pos: { x: 68, y: 64 },
-    water: 88,
+    water: 81,
     online: true,
     img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
   },
   {
     id: "D-004",
-    name: "창녕 내동천(2)",
+    name: "상주 이화천",
     addr: "경상남도 창녕군 이방면 안리 1013",
     pos: { x: 75, y: 62 },
     water: null, // 수신 없음 → Unknown
@@ -51,21 +51,71 @@ export const DEVICES_BASE = [
   },
   {
     id: "D-005",
-    name: "창녕 (2)",
+    name: "상주 장동천",
     addr: "경상남도",
     pos: { x: 30, y: 62 },
     water: 100, // 수신 없음 → Unknown
     online: true,
-    netError: true, // ✅ 추가: 네트워크 에러
+    netError: false, // ✅ 추가: 네트워크 에러
     img: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=900&q=70",
   },
   {
     id: "D-006",
-    name: "상주 안동 (2)",
+    name: "상주 득수천",
     addr: "경상남도 창녕군 이방면 안리 1013",
     pos: { x: 60, y: 82 },
-    water: 82, // 수신 없음 → Unknown
+    water: 88, // 수신 없음 → Unknown
     online: true,
+    netError: true, // ✅ 추가: 네트워크 에러
+    img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
+  },
+  {
+    id: "D-007",
+    name: "상주 대미천",
+    addr: "경상남도 창녕군 이방면 안리 1013",
+    pos: { x: 60, y: 82 },
+    water: 90, // 수신 없음 → Unknown
+    online: true,
+    netError: false, // ✅ 추가: 네트워크 에러
+    img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
+  },
+  {
+    id: "D-008",
+    name: "상주 화남천",
+    addr: "경상남도 창녕군 이방면 안리 1013",
+    pos: { x: 60, y: 82 },
+    water: 20, // 수신 없음 → Unknown
+    online: false,
+    netError: false, // ✅ 추가: 네트워크 에러
+    img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
+  },
+  {
+    id: "D-009",
+    name: "상주 용유천",
+    addr: "경상남도 창녕군 이방면 안리 1013",
+    pos: { x: 60, y: 82 },
+    water: 49, // 수신 없음 → Unknown
+    online: true,
+    netError: true, // ✅ 추가: 네트워크 에러
+    img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
+  },
+  {
+    id: "D-010",
+    name: "상주 봉림천",
+    addr: "경상남도 창녕군 이방면 안리 1013",
+    pos: { x: 60, y: 82 },
+    water: 77, // 수신 없음 → Unknown
+    online: true,
+    netError: false, // ✅ 추가: 네트워크 에러
+    img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
+  },
+  {
+    id: "D-011",
+    name: "상주 남곡천",
+    addr: "경상남도 창녕군 이방면 안리 1013",
+    pos: { x: 60, y: 82 },
+    water: 55, // 수신 없음 → Unknown
+    online: false,
     netError: true, // ✅ 추가: 네트워크 에러
     img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
   },
