@@ -1,13 +1,16 @@
 <template>
   <section class="map" aria-label="지도 영역">
-    <!-- 지도 이미지 -->
-    <div id="naverMap" class="map__canvas map__canvas--image" aria-label="지도 이미지">
-      <img class="map__img" src="@/assets/img/map.png" alt="지도 이미지">
-      <!-- 마커 레이어 -->
-      <div class="map__markers" id="mapMarkers" aria-label="지도 마커 레이어">
-        <DeviceMarker v-for="device in filteredDevices" :key="device.id" :device="device"
-          :active="device.id === activeDeviceId" @click="handleMarkerClick(device.id)" />
-      </div>
+    <!-- 카카오맵 컨테이너 -->
+    <div id="kakaoMap" class="map__canvas" aria-label="카카오 지도"></div>
+
+    <!-- 로딩 상태 -->
+    <div v-if="!isLoaded && !error" class="map__loading">
+      지도 로딩 중...
+    </div>
+
+    <!-- 에러 상태 -->
+    <div v-if="error" class="map__error">
+      {{ error }}
     </div>
 
     <!-- 팝업 -->
@@ -17,14 +20,29 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useDeviceStore } from '@/stores/device'
-import DeviceMarker from './DeviceMarker.vue'
+import { useKakaoMap } from '@/composables/useKakaoMap'
 import DevicePopup from './DevicePopup.vue'
 
 const router = useRouter()
 const deviceStore = useDeviceStore()
+
+// 카카오맵 composable
+const {
+  map,
+  isLoaded,
+  error,
+  initMap,
+  addMarker,
+  clearMarkers,
+  panTo
+} = useKakaoMap({
+  lat: 36.4128,    // 초기 중심 위도 (경상도 일대)
+  lng: 128.1583,   // 초기 중심 경도
+  level: 10     // 초기 줌 레벨
+})
 
 const showPopup = ref(false)
 
@@ -32,9 +50,47 @@ const filteredDevices = computed(() => deviceStore.filteredDevices)
 const activeDeviceId = computed(() => deviceStore.activeDeviceId)
 const activeDevice = computed(() => deviceStore.activeDevice)
 
+// 지도 초기화
+onMounted(async () => {
+  await initMap('kakaoMap')
+
+  if (isLoaded.value) {
+    createMarkers()
+  }
+})
+
+// 마커 생성
+function createMarkers() {
+  clearMarkers()
+
+  filteredDevices.value.forEach(device => {
+    // 위경도 좌표가 있는 경우에만 마커 생성
+    if (device.lat && device.lng) {
+      addMarker({
+        lat: device.lat,
+        lng: device.lng,
+        // imageSrc: getMarkerImage(device), // 커스텀 마커 이미지
+        onClick: () => handleMarkerClick(device.id)
+      })
+    }
+  })
+}
+
+// 수위 상태별 마커 이미지 (선택사항)
+// function getMarkerImage(device) {
+//   const stage = getWaterStage(device)
+//   return `/markers/marker-${stage}.png`
+// }
+
 function handleMarkerClick(deviceId) {
   deviceStore.setActiveDevice(deviceId)
   showPopup.value = true
+
+  // 클릭한 마커로 지도 이동
+  const device = filteredDevices.value.find(d => d.id === deviceId)
+  if (device?.lat && device?.lng) {
+    panTo(device.lat, device.lng)
+  }
 }
 
 function closePopup() {
@@ -47,64 +103,49 @@ function goToDetail() {
   }
 }
 
-// 팝업 위치 조정 (모바일 x)
-function isMobilePopupMode() {
-  return window.matchMedia("(pointer: coarse)").matches
-}
-
-function positionPopupNearMarker() {
-  if (isMobilePopupMode()) return
-
-  const popup = document.getElementById('devicePopup')
-  const marker = document.querySelector(`.map-marker[data-id="${activeDeviceId.value}"]`)
-  const map = document.querySelector('.map')
-
-  if (!popup || !marker || !map) return
-
-  const mapRect = map.getBoundingClientRect()
-  const markerRect = marker.getBoundingClientRect()
-
-  let x = (markerRect.left + markerRect.width / 2) - mapRect.left
-  let y = markerRect.top - mapRect.top
-
-  popup.style.left = x + 'px'
-  popup.style.top = y + 'px'
-
-  requestAnimationFrame(() => {
-    const pRect = popup.getBoundingClientRect()
-    const leftOverflow = pRect.left - mapRect.left
-    const rightOverflow = mapRect.right - pRect.right
-
-    if (leftOverflow < 8) x += (8 - leftOverflow)
-    if (rightOverflow < 8) x -= (8 - rightOverflow)
-
-    popup.style.left = x + 'px'
-    popup.style.top = y + 'px'
-  })
-}
-
-function handleResize() {
-  if (isMobilePopupMode()) return
-  if (showPopup.value && activeDeviceId.value) {
-    positionPopupNearMarker()
+// 필터링된 장비 목록 변경 시 마커 갱신
+watch(filteredDevices, () => {
+  if (isLoaded.value) {
+    createMarkers()
   }
-}
+}, { deep: true })
 
-watch([showPopup, activeDeviceId], () => {
-  if (showPopup.value && activeDeviceId.value) {
-    setTimeout(positionPopupNearMarker, 10)
+// 활성 장비 변경 시 지도 이동
+watch(activeDeviceId, (newId) => {
+  if (newId && isLoaded.value) {
+    const device = filteredDevices.value.find(d => d.id === newId)
+    if (device?.lat && device?.lng) {
+      panTo(device.lat, device.lng)
+    }
   }
 })
-
-onMounted(() => {
-  window.addEventListener('resize', handleResize)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', handleResize)
-})
-
-
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.map__canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.map__loading,
+.map__error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 16px 24px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border-radius: 8px;
+}
+
+.map__error {
+  background: rgba(255, 77, 79, 0.9);
+}
+</style>
