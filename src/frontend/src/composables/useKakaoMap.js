@@ -98,6 +98,7 @@ export function useKakaoMap(options = {}) {
       const mapOptions = {
         center: new window.kakao.maps.LatLng(lat, lng),
         level,
+        mapTypeId: window.kakao.maps.MapTypeId.HYBRID, // 위성 + 라벨
       };
 
       map.value = new window.kakao.maps.Map(containerEl, mapOptions);

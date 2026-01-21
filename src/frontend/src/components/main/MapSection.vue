@@ -24,72 +24,89 @@ import { ref, computed, watch, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useDeviceStore } from '@/stores/device'
 import { useKakaoMap } from '@/composables/useKakaoMap'
+import { waterStageFrom } from '@/utils/waterLevel'
 import DevicePopup from './DevicePopup.vue'
 
 const router = useRouter()
 const deviceStore = useDeviceStore()
 
-// 카카오맵 composable
 const {
   map,
   isLoaded,
   error,
   initMap,
-  addMarker,
-  clearMarkers,
+  clearOverlays,
   panTo
 } = useKakaoMap({
-  lat: 36.4128,    // 초기 중심 위도 (경상도 일대)
-  lng: 128.1583,   // 초기 중심 경도
-  level: 10     // 초기 줌 레벨
+  lat: 36.4128,   // D-001 좌표로 초기 중심 설정
+  lng: 128.1583,
+  level: 8
 })
 
 const showPopup = ref(false)
+const overlays = ref([])
 
 const filteredDevices = computed(() => deviceStore.filteredDevices)
 const activeDeviceId = computed(() => deviceStore.activeDeviceId)
 const activeDevice = computed(() => deviceStore.activeDevice)
 
-// 지도 초기화
 onMounted(async () => {
   await initMap('kakaoMap')
-
   if (isLoaded.value) {
     createMarkers()
   }
 })
 
-// 마커 생성
+// 수위 상태별 마커 dot 클래스
+function getMarkerDotClass(device) {
+  const stage = waterStageFrom(device)
+  return `nm-dot nm-dot--${stage}`
+}
+
+// CustomOverlay로 마커 생성
 function createMarkers() {
-  clearMarkers()
+  // 기존 오버레이 제거
+  overlays.value.forEach(overlay => overlay.setMap(null))
+  overlays.value = []
 
   filteredDevices.value.forEach(device => {
-    // 위경도 좌표가 있는 경우에만 마커 생성
-    if (device.lat && device.lng) {
-      addMarker({
-        lat: device.lat,
-        lng: device.lng,
-        // imageSrc: getMarkerImage(device), // 커스텀 마커 이미지
-        onClick: () => handleMarkerClick(device.id)
+    // lat/lon 좌표가 있는 경우에만 마커 생성
+    if (device.lat && device.lon) {
+      const position = new window.kakao.maps.LatLng(device.lat, device.lon)
+
+      const content = document.createElement('div')
+      content.className = 'map-marker'
+      content.dataset.id = device.id
+      content.innerHTML = `<span class="${getMarkerDotClass(device)}"></span>`
+
+      content.addEventListener('click', (e) => {
+        e.stopPropagation() // 이벤트 전파 중단하기(팝업 안나옴)
+        e.preventDefault()
+        handleMarkerClick(device.id)
       })
+
+      const overlay = new window.kakao.maps.CustomOverlay({
+        position,
+        content,
+        yAnchor: 0.5,
+        xAnchor: 0.5
+      })
+
+      overlay.setMap(map.value)
+      overlays.value.push(overlay)
     }
   })
 }
-
-// 수위 상태별 마커 이미지 (선택사항)
-// function getMarkerImage(device) {
-//   const stage = getWaterStage(device)
-//   return `/markers/marker-${stage}.png`
-// }
 
 function handleMarkerClick(deviceId) {
   deviceStore.setActiveDevice(deviceId)
   showPopup.value = true
 
-  // 클릭한 마커로 지도 이동
   const device = filteredDevices.value.find(d => d.id === deviceId)
-  if (device?.lat && device?.lng) {
-    panTo(device.lat, device.lng)
+  if (device?.lat && device?.lon) {
+    requestAnimationFrame(() => {
+      panTo(device.lat, device.lon)
+    })
   }
 }
 
@@ -114,8 +131,8 @@ watch(filteredDevices, () => {
 watch(activeDeviceId, (newId) => {
   if (newId && isLoaded.value) {
     const device = filteredDevices.value.find(d => d.id === newId)
-    if (device?.lat && device?.lng) {
-      panTo(device.lat, device.lng)
+    if (device?.lat && device?.lon) {
+      panTo(device.lat, device.lon)
     }
   }
 })
@@ -147,5 +164,48 @@ watch(activeDeviceId, (newId) => {
 
 .map__error {
   background: rgba(255, 77, 79, 0.9);
+}
+
+// 카카오맵 CustomOverlay용 마커 스타일
+:global(.map-marker) {
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:global(.nm-dot) {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, .32);
+  border: 2px solid rgba(0, 0, 0, .50);
+}
+
+:global(.nm-dot--ok) {
+  background: #27c46b;
+  box-shadow: 0 0 0 8px rgba(39, 196, 107, .68);
+}
+
+:global(.nm-dot--caution) {
+  background: #f7c948;
+  box-shadow: 0 0 0 8px rgba(247, 201, 72, .66);
+}
+
+:global(.nm-dot--warn) {
+  background: #ff9f1a;
+  box-shadow: 0 0 0 8px rgba(255, 159, 26, .66);
+}
+
+:global(.nm-dot--crit) {
+  background: #ff4d4f;
+  box-shadow: 0 0 0 8px rgba(255, 77, 79, .66);
+}
+
+:global(.nm-dot--unk) {
+  background: #9aa7b7;
+  box-shadow: 0 0 0 8px rgba(154, 167, 183, .62);
 }
 </style>

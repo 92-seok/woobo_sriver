@@ -942,8 +942,6 @@ input:focus {
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.45);
   max-height: min(68vh, 520px);
   overflow: auto;
-  left: 0;
-  top: 0;
 }
 
 .popup__head {

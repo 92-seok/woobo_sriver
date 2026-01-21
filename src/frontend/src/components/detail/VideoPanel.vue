@@ -4,7 +4,7 @@
         <div class="hd-left">실시간 영상</div>
         <div class="hd-right">
           <button class="btn btn--blue03 w-130px h-30px" type="button" @click="showHelp">
-            <v-icon size="small">mdi-information-outline</v-icon>
+            <i data-lucide="pause-circle" class="btn__icon"></i>
             <span class="btn__text text-12">재생불가 도움말</span>
           </button>
         </div>
@@ -28,11 +28,11 @@
 
         <div class="video-actions">
           <button class="btn btn-soft" @click="playVideo">
-            <v-icon>mdi-play-circle-outline</v-icon>
+            <i data-lucide="play-circle" class="btn__icon"></i>
             영상 재생
           </button>
           <button class="btn btn-ghost" @click="standby">
-            <v-icon>mdi-loading</v-icon>
+            <i data-lucide="pause-circle" class="btn__icon"></i>
             대기 중
           </button>
         </div>
@@ -41,7 +41,7 @@
   </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import cctvImg from '@/assets/img/cctv.png'
 
 const props = defineProps({
@@ -64,6 +64,10 @@ const playVideo = () => {
 const standby = () => {
   alert('대기 상태입니다.')
 }
+
+onMounted(() => {
+  window.lucide?.createIcons()
+})
 </script>
 
 <style lang="scss" scoped></style>

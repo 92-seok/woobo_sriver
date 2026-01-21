@@ -15,11 +15,11 @@
 
         <div class="video-actions">
           <v-btn class="btn btn-soft" @click="copyAddress">
-            <v-icon class="mr-2">mdi-content-copy</v-icon>
+            <i data-lucide="copy" class="btn__icon mr-2"></i>
             주소 복사
           </v-btn>
           <v-btn class="btn btn-ghost" @click="openNaverMap">
-            <v-icon class="mr-2">mdi-map-outline</v-icon>
+            <i data-lucide="map" class="btn__icon mr-2"></i>
             네이버 지도
           </v-btn>
         </div>
@@ -28,7 +28,7 @@
   </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import mapImg from '@/assets/img/map.png'
 
 const props = defineProps({
@@ -56,6 +56,10 @@ const openNaverMap = () => {
   const url = `https://map.naver.com/v5/?c=${lng.value},${lat.value},15,0,0,0,dh`
   window.open(url, '_blank', 'noopener,noreferrer')
 }
+
+onMounted(() => {
+  window.lucide?.createIcons()
+})
 </script>
 
 <style lang="scss"></style>

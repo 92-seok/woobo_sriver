@@ -69,46 +69,6 @@ export const DEVICES_BASE = [
     netError: true, // ✅ 추가: 네트워크 에러
     img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
   },
-  {
-    id: "D-007",
-    name: "상주 안동 (2)",
-    addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 60, y: 44 },
-    water: 82, // 수신 없음 → Unknown
-    online: true,
-    netError: true, // ✅ 추가: 네트워크 에러
-    img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
-  },
-  {
-    id: "D-008",
-    name: "상주 안동 (2)",
-    addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 60, y: 82 },
-    water: 44, // 수신 없음 → Unknown
-    online: true,
-    netError: true, // ✅ 추가: 네트워크 에러
-    img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
-  },
-  {
-    id: "D-009",
-    name: "상주 안동 (2)",
-    addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 50, y: 82 },
-    water: 67, // 수신 없음 → Unknown
-    online: true,
-    netError: false, // ✅ 추가: 네트워크 에러
-    img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
-  },
-  {
-    id: "D-010",
-    name: "상주 안동 (2)",
-    addr: "경상남도 창녕군 이방면 안리 1013",
-    pos: { x: 30, y: 55 },
-    water: 59, // 수신 없음 → Unknown
-    online: true,
-    netError: false, // ✅ 추가: 네트워크 에러
-    img: "https://images.unsplash.com/photo-1441829266145-6d4bfbd38eb4?auto=format&fit=crop&w=900&q=70",
-  },
 ];
 
 /* ---------------------------

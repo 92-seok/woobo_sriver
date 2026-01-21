@@ -3,7 +3,7 @@
       <div class="panel__head">
         <div>
           <span class="panel__icon" aria-hidden="true">
-            <v-icon color="white">mdi-alert-circle</v-icon>
+            <i data-lucide="alert-circle" class="btn__icon"></i>
           </span>
           <h2 class="panel__title">상태 안내</h2>
         </div>
@@ -33,6 +33,11 @@
   </template>
 
 <script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  window.lucide?.createIcons()
+})
 </script>
 
 <style scoped></style>

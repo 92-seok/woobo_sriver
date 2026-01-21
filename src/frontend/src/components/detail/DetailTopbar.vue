@@ -13,21 +13,21 @@
       <!-- 햄버거 버튼 (모바일) -->
       <v-btn id="menuToggle" class="topbar__menuBtn" variant="text" icon @click="toggleMenu"
         aria-controls="topbarActions" :aria-expanded="menuOpen" aria-label="메뉴">
-        <v-icon>mdi-menu</v-icon>
+        <i data-lucide="menu" class="btn__icon"></i>
       </v-btn>
 
       <!-- 메뉴 (드롭다운) -->
       <div class="search__actions" id="topbarActions" :class="{ 'is-open': menuOpen }" role="group" aria-label="바로가기">
         <v-btn variant="text" class="btn-ghost">
-          <v-icon class="mr-2">mdi-waves</v-icon>
+          <i data-lucide="waves" class="btn__icon mr-2"></i>
           <span>수위</span>
         </v-btn>
         <v-btn variant="text" class="btn-ghost">
-          <v-icon class="mr-2">mdi-cctv</v-icon>
+          <i data-lucide="cctv" class="btn__icon mr-2"></i>
           <span>CCTV</span>
         </v-btn>
         <v-btn variant="text" class="btn-ghost" @click="goToReport">
-          <v-icon class="mr-2">mdi-file-document</v-icon>
+          <i data-lucide="file-text" class="btn__icon mr-2"></i>
           <span>보고서</span>
         </v-btn>
       </div>
@@ -60,6 +60,7 @@ const goToReport = () => {
 
 onMounted(() => {
   document.addEventListener('click', closeMenu)
+  window.lucide?.createIcons()
 })
 
 onUnmounted(() => {
