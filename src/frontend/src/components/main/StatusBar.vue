@@ -3,7 +3,7 @@
     <div class="panel__head">
       <div>
         <span class="panel__icon" aria-hidden="true">
-          <v-icon color="white">mdi-chart-line</v-icon>
+          <i data-lucide="activity" class="btn__icon"></i>
         </span>
         <h2 class="panel__title">장비 상태</h2>
       </div>
@@ -33,11 +33,15 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useDeviceStore } from '@/stores/device'
 
 const deviceStore = useDeviceStore()
 const stats = computed(() => deviceStore.deviceStats)
+
+onMounted(() => {
+  window.lucide?.createIcons()
+})
 </script>
 
 <style scoped>

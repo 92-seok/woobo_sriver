@@ -1,39 +1,49 @@
-import { defineConfig, loadEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vuetify from 'vite-plugin-vuetify'
-import { fileURLToPath, URL } from 'node:url'
+import { defineConfig, loadEnv } from "vite";
+import vue from "@vitejs/plugin-vue";
+import vuetify from "vite-plugin-vuetify";
+import { fileURLToPath, URL } from "node:url";
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
+  const env = loadEnv(mode, process.cwd(), "");
 
   return {
     transpileDependencies: true,
     lintOnSave: false,
-    plugins: [
-      vue(),
-      vuetify({ autoImport: true })
-    ],
+    plugins: [vue(), vuetify({ autoImport: true })],
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
-      }
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
+      },
     },
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'modern-compiler',
-          silenceDeprecations: ['legacy-js-api', 'import']
-        }
-      }
+          api: "modern-compiler",
+          silenceDeprecations: ["legacy-js-api", "import"],
+        },
+      },
     },
     server: {
       port: Number(env.SERVICE_PORT),
-      host: '0.0.0.0',
+      host: "0.0.0.0",
       allowedHosts: ["www.woobo.online", "localhost"],
+
+      // HMR 설정 추가
+      hmr: {
+        host: "localhost",
+        protocol: "ws",
+      },
+
+      // watch 설정 추가
+      watch: {
+        usePolling: true,
+        interval: 1000,
+      },
+
       proxy: {
-        '/api': {
+        "/api": {
           target: env.SERVICE_PROXY_TARGET,
-          changeOrigin: true
+          changeOrigin: true,
         },
       },
       headers: {
@@ -44,9 +54,9 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
-      outDir: 'dist',
-      assetsDir: 'assets',
-      sourcemap: false
-    }
-  }
-})
+      outDir: "dist",
+      assetsDir: "assets",
+      sourcemap: false,
+    },
+  };
+});

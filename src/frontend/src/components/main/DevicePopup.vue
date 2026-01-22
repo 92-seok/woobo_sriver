@@ -3,7 +3,7 @@
     <!-- 헤더 -->
     <div class="popup__head">
       <div class="popup__title">
-        <v-icon color="white">mdi-waves</v-icon>
+        <i data-lucide="waves" class="btn__icon"></i>
         <strong>{{ device.name }}</strong>
       </div>
 
@@ -48,7 +48,7 @@
               <dd>{{ device.lv70 || '-' }} m</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--warm"></span>경계 (80%)</dt>
+              <dt><span class="mr-5 sq sq--warn"></span>경계 (80%)</dt>
               <dd>{{ device.lv80 || '-' }} m</dd>
             </div>
             <div class="kv__row">
@@ -83,11 +83,11 @@
     <!-- 푸터 버튼 -->
     <div class="popup__foot">
       <v-btn variant="text" class="btn-ghost" @click="$emit('close')">
-        <v-icon class="mr-2">mdi-close</v-icon>
+        <i data-lucide="x" class="btn__icon mr-2"></i>
         <span>닫기</span>
       </v-btn>
       <v-btn variant="text" class="btn-soft" @click="$emit('detail')">
-        <v-icon class="mr-2">mdi-magnify</v-icon>
+        <i data-lucide="search" class="btn__icon mr-2"></i>
         <span>상세보기</span>
       </v-btn>
     </div>
@@ -95,7 +95,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted, watch, nextTick } from 'vue'
 import { waterStageFrom, waterText, networkStage, networkLabel, fillColorByStage, clamp } from '@/utils/waterLevel'
 
 const props = defineProps({
@@ -128,6 +128,17 @@ const waterPct = computed(() => {
 })
 
 const fillColor = computed(() => fillColorByStage(stage.value))
+
+onMounted(() => {
+  window.lucide?.createIcons()
+})
+
+watch(() => props.show, async (val) => {
+  if (val) {
+    await nextTick()
+    window.lucide?.createIcons()
+  }
+})
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

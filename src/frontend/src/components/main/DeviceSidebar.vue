@@ -4,7 +4,7 @@
       <div class="sidebar__title">
         <div>
           <span class="panel__icon" aria-hidden="true">
-            <v-icon color="white">mdi-file-tree</v-icon>
+            <i data-lucide="list-tree" class="btn__icon"></i>
           </span>
           <h2>장비 목록</h2>
         </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import { useDeviceStore } from '@/stores/device'
 import DeviceCard from './DeviceCard.vue'
 
@@ -30,6 +31,10 @@ const deviceStore = useDeviceStore()
 function handleCardClick(deviceId) {
   deviceStore.setActiveDevice(deviceId)
 }
+
+onMounted(() => {
+  window.lucide?.createIcons()
+})
 </script>
 
 <style scoped></style>
