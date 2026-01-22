@@ -27,7 +27,7 @@ import DeviceSidebar from '@/components/main/DeviceSidebar.vue'
 import BottomPanel from '@/components/main/BottomPanel.vue'
 
 onMounted(() => {
-  // 아이콘 초기화 필요시 사용
+
 })
 
 </script>

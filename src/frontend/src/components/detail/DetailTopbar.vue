@@ -18,17 +18,17 @@
 
       <!-- 메뉴 (드롭다운) -->
       <div class="search__actions" id="topbarActions" :class="{ 'is-open': menuOpen }" role="group" aria-label="바로가기">
-        <v-btn variant="text" class="btn-ghost">
+        <v-btn variant="text" class="btn-ghost" @click="goToMain()">
           <i data-lucide="waves" class="btn__icon mr-2"></i>
           <span>수위</span>
         </v-btn>
-        <v-btn variant="text" class="btn-ghost">
+        <v-btn variant="text" class="btn-ghost" @click="goToDetail()">
           <i data-lucide="cctv" class="btn__icon mr-2"></i>
           <span>CCTV</span>
         </v-btn>
-        <v-btn variant="text" class="btn-ghost" @click="goToReport">
+        <v-btn variant="text" class="btn-ghost" @click="goToReport()">
           <i data-lucide="file-text" class="btn__icon mr-2"></i>
-          <span>보고서</span>
+          <span class="mr-2">보고서</span>
         </v-btn>
       </div>
     </div>
@@ -38,8 +38,10 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useNavigation } from '@/composables/useNavigation'
 
-const router = useRouter()
+const { goToMain, goToDetail, goToReport } = useNavigation()
+
 const menuOpen = ref(false)
 
 const toggleMenu = (e) => {
@@ -53,10 +55,9 @@ const closeMenu = (e) => {
   }
 }
 
-const goToReport = () => {
-  // report 페이지로 이동 (라우트 설정 필요)
-  window.location.href = '/report.html'
-}
+// const goToReport = () => {
+//   window.location.href = '/report.html'
+// }
 
 onMounted(() => {
   document.addEventListener('click', closeMenu)

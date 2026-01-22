@@ -9,13 +9,13 @@
 
     <!-- 메인콘텐츠 -->
     <div class="sub-wrap">
-      <DetailContent />
+      <DetailContent :device="activeDevice" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useDeviceStore } from '@/stores/device'
 import DetailTopbar from '@/components/detail/DetailTopbar.vue'
@@ -23,6 +23,8 @@ import DetailContent from '@/components/detail/DetailContent.vue'
 
 const route = useRoute()
 const deviceStore = useDeviceStore()
+
+const activeDevice = computed(() => deviceStore.activeDevice)
 
 onMounted(() => {
   document.body.classList.add('page-detail')
