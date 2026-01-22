@@ -18,15 +18,15 @@
 
       <!-- 메뉴 (드롭다운) -->
       <div class="search__actions" id="topbarActions" :class="{ 'is-open': menuOpen }" role="group" aria-label="바로가기">
-        <v-btn variant="text" class="btn-ghost">
+        <v-btn variant="text" class="btn-ghost" @click="goToMain()">
           <i data-lucide="waves" class="btn__icon mr-2"></i>
           <span>수위</span>
         </v-btn>
-        <v-btn variant="text" class="btn-ghost">
+        <v-btn variant="text" class="btn-ghost" @click="goToDetail()">
           <i data-lucide="cctv" class="btn__icon mr-2"></i>
           <span>CCTV</span>
         </v-btn>
-        <v-btn variant="text" class="btn-ghost">
+        <v-btn variant="text" class="btn-ghost" @click="goToReport()">
           <i data-lucide="file-text" class="btn__icon mr-2"></i>
           <span class="mr-2">보고서</span>
         </v-btn>
@@ -37,6 +37,9 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useNavigation } from '@/composables/useNavigation'
+
+const { goToMain, goToDetail, goToReport } = useNavigation()
 
 const menuOpen = ref(false)
 
