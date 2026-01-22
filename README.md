@@ -21,6 +21,12 @@ http://woobo.online:4000/woobo/sriver
 http://www.woobo.online:8000
 ```
 
+### ** DB 접속 주소 **
+```bash
+www.woobo.online:13306
+WBEarly / #woobosys@early!
+```
+
 ### ** WEB 실행 **
 
 1. 의존성 설치
