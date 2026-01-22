@@ -11,7 +11,7 @@ import { useDeviceStore } from '@/stores/device'
 const deviceStore = useDeviceStore()
 
 onMounted(() => {
-  deviceStore.startRealtimeSimulation()
+  deviceStore.startPolling(30000)
 })
 </script>
 

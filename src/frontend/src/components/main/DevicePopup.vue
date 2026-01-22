@@ -29,31 +29,34 @@
       <div class="popup__map">
         <!-- 이미지 -->
         <figure class="thumb">
-          <img :src="device.img" :alt="`${device.name} 현장 이미지`">
+          <img :src="device.img || device.rtspImg || '/placeholder.jpg'" :alt="`${device.name} 현장 이미지`">
         </figure>
 
         <!-- 우측 정보 -->
         <div class="popup__right">
           <dl class="kv">
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--unk"></span>함체 높이</dt>
-              <dd>{{ device.height || '-' }}</dd>
+              <dt><span class="mr-5 sq sq--unk"></span>함체높이(m)</dt>
+              <dd>{{ device.height ?? '-' }} m</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--ok"></span>현재 수위(%)</dt>
-              <dd>{{ device.water != null ? device.water : '-' }}</dd>
+              <dt><span class="mr-5 sq sq--ok"></span>현재수위(m)</dt>
+              <dd>{{ parseFloat(device.water_data).toFixed(2) ?? '-' }} m</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--caution"></span>주의 (70%)</dt>
-              <dd>{{ device.lv70 || '-' }} m</dd>
+              <dt><span class="mr-5 sq sq--caution"></span>주의 ({{ parseFloat(device.thresholdL1).toFixed(0) ?? 70 }}%)
+              </dt>
+              <dd> {{ device.thresholdL1_data.toFixed(2) }} m</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--warn"></span>경계 (80%)</dt>
-              <dd>{{ device.lv80 || '-' }} m</dd>
+              <dt><span class="mr-5 sq sq--warn"></span>경계 ({{ parseFloat(device.thresholdL2).toFixed(0) ?? 80 }}%)
+              </dt>
+              <dd> {{ device.thresholdL2_data.toFixed(2) }} m</dd>
             </div>
             <div class="kv__row">
-              <dt><span class="mr-5 sq sq--crit"></span>심각 (90%)</dt>
-              <dd>{{ device.lv90 || '-' }} m</dd>
+              <dt><span class="mr-5 sq sq--crit"></span>심각 ({{ parseFloat(device.thresholdL3).toFixed(0) ?? 90 }}%)
+              </dt>
+              <dd> {{ device.thresholdL3_data.toFixed(2) }} m</dd>
             </div>
           </dl>
         </div>

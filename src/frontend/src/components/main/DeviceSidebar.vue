@@ -10,11 +10,22 @@
         </div>
       </div>
       <div class="sidebar__count">
-        <span>{{ deviceStore.filteredDevices.length }}</span>개
+        <span>{{ deviceStore.filteredDevices.length ?? 0 }}</span>개
       </div>
     </div>
 
-    <div class="list" role="list">
+    <!-- 로딩 상태 -->
+    <div v-if="deviceStore.loading" class="loading">
+      로딩 중...
+    </div>
+
+    <!-- 에러 상태 -->
+    <div v-else-if="deviceStore.error" class="error">
+      {{ deviceStore.error }}
+    </div>
+
+    <!-- 장비 목록 -->
+    <div v-else class="list" role="list">
       <DeviceCard v-for="device in deviceStore.filteredDevices" :key="device.id" :device="device"
         :active="device.id === deviceStore.activeDeviceId" @click="handleCardClick(device.id)" />
     </div>
@@ -37,4 +48,14 @@ onMounted(() => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.loading,
+.error {
+  padding: 20px;
+  text-align: center;
+}
+
+.error {
+  color: #ff4d4f;
+}
+</style>
