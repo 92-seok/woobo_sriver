@@ -36,11 +36,13 @@ npm install
 
 2. front-end 서버 실행
 ```bash
+cd src/frontend
 npm run dev
 ```
 
 3. back-end 서버 실행
 ```bash
+cd src/backend
 npm run dev
 ```
 
