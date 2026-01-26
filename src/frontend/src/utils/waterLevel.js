@@ -30,7 +30,10 @@ export function waterText(stage) {
 
 export function networkStage(device) {
   if (!device) return NETWORK_STAGES.UNK;
-  if (device.netError === true) return NETWORK_STAGES.ERROR;
+  // ErrorChk: 0 = 오류, 1~5 = 정상
+  const chk = device.errorChk;
+  if (chk === 0) return NETWORK_STAGES.ERROR;
+  if (chk >= 1 && chk <= 5) return NETWORK_STAGES.OK;
   if (!device.online || device.water === null) return NETWORK_STAGES.UNK;
   return NETWORK_STAGES.OK;
 }

@@ -461,6 +461,9 @@ body.page-detail {
   background: var(--crit);
   box-shadow: 0 0 0 4px rgba(255, 90, 106, 0.16);
 }
+.sub_pill.bad {
+  color: rgba(255, 90, 106, 0.95); /* 빨간색 텍스트 */
+}
 
 /* =========================
    DETAIL LEFT 컬럼 세로 꽉채움 (PC)

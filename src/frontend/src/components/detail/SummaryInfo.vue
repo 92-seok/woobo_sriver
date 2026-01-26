@@ -8,9 +8,9 @@
 
         <div class="k">종합상태</div>
         <div class="v">
-          <span class="sub_pill good">
+          <span class="sub_pill" :class="statusClass">
             <span class="dot-10"></span>
-            <span class="pill-text">정상 (Operational)</span>
+            <span class="pill-text">{{ statusLabel }}</span>
           </span>
         </div>
 
@@ -34,9 +34,23 @@ const props = defineProps({
   }
 })
 
-const address = computed(() => props.device?.addr || '충청북도 청주시 상당구 용암동 2899')
-const lastUpdate = computed(() => props.device?.lastUpdate || '2025-12-21 13:00:00')
-const installDate = computed(() => props.device?.installDate || '2023-09-07')
+const address = computed(() => props.device?.addr || '-')
+const lastUpdate = computed(() => props.device?.lastDate || '-')
+const installDate = computed(() => props.device?.installDate || '-')
+
+// 종합상태
+const statusClass = computed(() => {
+  if (props.device?.netError) return 'error'
+  if (!props.device?.online) return 'unknown'
+  return 'good'
+})
+
+const statusLabel = computed(() => {
+  if (props.device?.netError) return '오류 (error)'
+  if (!props.device?.online) return '알 수 없음 (unknown)'
+  return '정상 (Operational)'
+})
+
 </script>
 
 <style lang="scss" scoped></style>
