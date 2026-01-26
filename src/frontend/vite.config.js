@@ -30,8 +30,9 @@ export default defineConfig(({ mode }) => {
 
       // HMR 설정 추가
       hmr: {
-        host: "localhost",
+        host: "www.woobo.online",
         protocol: "ws",
+        clientPort: 8000,
       },
 
       // watch 설정 추가
