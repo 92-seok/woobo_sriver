@@ -82,7 +82,7 @@ export class WeatherService {
       netError,
       img: equip.rtspImg || null,
       rtspUrl: equip.rtspUrl || null,
-      lastDate: equip.lastDate || null,
+      LastDate: equip.LastDate || null,
       installDate: equip.installDate || null,
       height,
       thresholdL1: equip.thresholdL1 ?? 70,

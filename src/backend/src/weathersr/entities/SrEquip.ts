@@ -18,7 +18,7 @@ export class SrEquip {
   errorChk: number | null;
 
   @Column('varchar', { name: 'LastDate', nullable: true, length: 20 })
-  lastDate: string | null;
+  LastDate: string | null;
 
   @Column('varchar', { name: 'LastStatus', nullable: true, length: 20 })
   lastStatus: string | null;

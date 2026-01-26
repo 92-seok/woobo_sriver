@@ -15,7 +15,7 @@
         </div>
 
         <div class="k">마지막 업데이트</div>
-        <div class="v">{{ lastUpdate }}</div>
+        <div class="v">{{ LastDate }}</div>
 
         <div class="k">설치일</div>
         <div class="v">{{ installDate }}</div>
@@ -35,7 +35,7 @@ const props = defineProps({
 })
 
 const address = computed(() => props.device?.addr || '-')
-const lastUpdate = computed(() => props.device?.lastDate || '-')
+const LastDate = computed(() => props.device?.LastDate || '-')
 const installDate = computed(() => props.device?.installDate || '-')
 
 // 종합상태
