@@ -528,13 +528,27 @@ body.page-detail {
 .sub_pill.good {
   color: rgba(160, 255, 205, 0.95);
 }
+.sub_pill.good .dot-10 {
+  background: var(--ok);
+  box-shadow: 0 0 0 4px rgba(56, 210, 125, 0.14);
+}
+
+/* 비정상 - 정상과 동일한 구조, 빨간색 */
+.sub_pill.bad {
+  color: rgba(255, 90, 106, 0.95);
+}
+.sub_pill.bad .dot-10 {
+  background: var(--crit);
+  box-shadow: 0 0 0 4px rgba(255, 90, 106, 0.16);
+}
+
+/* 주의 - 노란색 */
+.sub_pill.warn {
+  color: rgba(255, 211, 77, 0.95);
+}
 .sub_pill.warn .dot-10 {
   background: var(--warn);
   box-shadow: 0 0 0 4px rgba(255, 211, 77, 0.15);
-}
-.sub_pill.bad .dot-10 {
-  background: var(--bad);
-  box-shadow: 0 0 0 4px rgba(255, 90, 106, 0.16);
 }
 
 .text-helper {

@@ -1,12 +1,14 @@
 <template>
   <v-app>
     <router-view />
+    <ToastContainer />
   </v-app>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import { useDeviceStore } from '@/stores/device'
+import ToastContainer from '@/components/common/ToastContainer.vue'
 
 const deviceStore = useDeviceStore()
 

@@ -43,6 +43,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import cctvImg from '@/assets/img/cctv.png'
+import { useToast } from '@/composables/useToast'
 
 const props = defineProps({
   device: {
@@ -51,6 +52,8 @@ const props = defineProps({
   }
 })
 
+const { show: toast } = useToast()
+
 const videoThumbnail = computed(() => props.device?.img || cctvImg)
 
 const showHelp = () => {
@@ -58,11 +61,11 @@ const showHelp = () => {
 }
 
 const playVideo = () => {
-  alert('여기에 스트리밍 재생 로직(HLS/RTSP 변환 등)을 연결하세요.')
+  toast('여기에 스트리밍 재생 로직(HLS/RTSP 변환 등)을 연결하세요.')
 }
 
 const standby = () => {
-  alert('대기 상태입니다.')
+  toast('대기 상태입니다.')
 }
 
 onMounted(() => {
